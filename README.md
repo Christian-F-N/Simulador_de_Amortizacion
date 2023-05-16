@@ -1,30 +1,23 @@
-# Sistema de Amortizacion
+# Bienvenido al Simulador de Tabla de Pagos
 
-### Enfoque a un asesor de crédito y al cliente.
-# Bienvenido al Proyecto Awesome
+Este repositorio contiene el código fuente y la documentación del Simulador de Tabla de Pagos, una aplicación diseñada para ayudarte en el cálculo de los pagos y amortizaciones de préstamos utilizando dos sistemas de amortización: el sistema francés y el sistema americano.
 
-¡Hola y bienvenido al Proyecto Simulador de la tabla de pagos con sistemas de amortización francesa y sistemas de amortización alemana.! 
--Este repositorio es un lugar donde compartimos ideas, colaboramos y construimos cosas increíbles.
+## Características principales
 
-## Acerca del Proyecto
+- **Asesor de crédito configurable:** Nuestra aplicación te permite configurar las opciones del asesor de crédito para adaptarlo a tus necesidades específicas. Podrás establecer parámetros como tasas de interés, plazos de pago y monto del préstamo.
 
-El Proyecto Simulador de la tabla de pagos. Aquí encontrarás un equipo diverso de desarrolladores, diseñadores y personas apasionadas por colaborar en el proyecto.
+- **Generación de reportes:** El simulador te permitirá generar reportes detallados de los pagos y amortizaciones, brindándote una visión clara de la evolución de tu préstamo. Estos reportes te serán útiles tanto a ti como cliente, como a los asesores de crédito que deseen analizar diferentes escenarios.
 
-## Cómo Contribuir
+## Cómo empezar
 
-Nos encantaría que te unas a nosotros y contribuyas al Proyecto Awesome. Puedes contribuir de varias formas:
+1. Clona este repositorio en tu máquina local.
+2. Instala las dependencias necesarias siguiendo las instrucciones del archivo `README`.
+3. Configura las opciones del asesor de crédito según tus necesidades en el archivo de configuración correspondiente.
+4. Ejecuta la aplicación y disfruta de su funcionalidad.
 
-- Reportando problemas o errores en la sección de "Issues".
-- Proponiendo nuevas ideas y funcionalidades en la sección de "Issues".
-- Enviando solicitudes de extracción (pull requests) para solucionar problemas o agregar nuevas características.
+## Contribuciones
 
-## Código de Conducta
+¡Tu contribución es bienvenida! Si deseas mejorar esta aplicación, agregar nuevas funcionalidades o solucionar problemas, no dudes en enviar tus pull requests. Asegúrate de seguir nuestras pautas de contribución y etiquetar correctamente tus cambios.
 
-En el Proyecto Awesome, nos esforzamos por mantener un ambiente amigable, 
-inclusivo y respetuoso para todos los participantes.
-
-## Contacto
-
-Si tienes alguna pregunta, sugerencia o simplemente quieres saludar, no dudes en contactarnos.
-¡Gracias por unirte al Proyecto! Esperamos colaborar contigo y construir cosas increíbles juntos.
+Esperamos que este Simulador de Tabla de Pagos sea una herramienta útil para ti tanto como cliente como asesor de crédito. ¡Disfruta de la experiencia y no dudes en compartir tus comentarios y sugerencias!
 
