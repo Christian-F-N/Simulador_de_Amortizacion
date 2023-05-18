@@ -8,6 +8,7 @@ package sistemas.de.amortizacion;
 import DataAccess.DataQuery;
 import Entities.CreditAdvisor;
 import FrenchAmortization.FrenchAmortizationProcessor;
+import GermanAmortization.GermanAmortizationProcessor;
 import java.util.ArrayList;
 
 /**
@@ -30,19 +31,32 @@ public class SistemasDeAmortizacion {
             System.out.println("Usuario: " + advisor.getUser());
             System.out.println("----------------------");
         }
-double cp=10000;
-double I=0.14;
-int n=5;
-    FrenchAmortizationProcessor frenc = new FrenchAmortizationProcessor();
-    double cuota= frenc.calculateMonthlyPayment(cp, I, n);
-    double interes = frenc.calculateTotalInterest(cp, I);
-    double capital = frenc.calculateCurrentEquity(cuota,interes);
-    double saldo = frenc.calculateRemainingBalance(cp, capital);
-     System.out.println("Cuota = "+cuota);
-      System.out.println("Interes = "+interes);
-       System.out.println("Capital = "+capital);
-       System.out.println("Saldo = "+saldo);
+        double cp = 10000;
+        double i = 0.14;
+        int n = 5;
+//Prueba metodos FrenchAmortizationProcessor
+        FrenchAmortizationProcessor french = new FrenchAmortizationProcessor();
+        double cuotaFrencch = french.calculateMonthlyPayment(cp, i, n);
+        double interesFrencch = french.calculateTotalInterest(cp, i);
+        double capitalFrencch = french.calculateCurrentEquity(cuotaFrencch, interesFrencch);
+        double saldoFrencch = french.calculateRemainingBalance(cp, capitalFrencch);
+        System.out.println("Francesa");
+        System.out.println("Cuota = " + cuotaFrencch);
+        System.out.println("Interes = " + interesFrencch);
+        System.out.println("Capital = " + capitalFrencch);
+        System.out.println("Saldo = " + saldoFrencch);
+//Prueba metodos GermanAmortizationProcessor
+        GermanAmortizationProcessor german = new GermanAmortizationProcessor();
+        double capitalGerman = german.calculateCurrentEquity(cp, n);
+        double interesGerman = german.calculateTotalInterest(cp, i);
+        double cuotaGerman = german.calculateMonthlyPayment(interesGerman, capitalGerman);
+        double saldoGerman = german.calculateRemainingBalance(cp, capitalGerman);
+        System.out.println("Alemana");
+        System.out.println("Cuota = " + cuotaGerman);
+        System.out.println("Interes = " + interesGerman);
+        System.out.println("Capital = " + capitalGerman);
+        System.out.println("Saldo = " + saldoGerman);
+
     }
-    
-    
+
 }
