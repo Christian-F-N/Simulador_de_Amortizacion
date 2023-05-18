@@ -1,0 +1,267 @@
+CREATE DATABASE CreditAdvisorDB;
+USE CreditAdvisorDB;
+
+CREATE TABLE CreditType (
+    ID_Type_Cred INT AUTO_INCREMENT,
+    Name_Cred VARCHAR(255),
+    PRIMARY KEY (ID_Type_Cred)
+);
+
+CREATE TABLE EntityType (
+    ID_Ent_Typ INT AUTO_INCREMENT,
+    Nam_Ent_Typ VARCHAR(255),
+    PRIMARY KEY (ID_Ent_Typ)
+);
+
+CREATE TABLE FinancialEntity (
+    ID_Fin_Ent INT AUTO_INCREMENT,
+    Nam_Fin_Ent VARCHAR(255),
+	Ent_Typ_ID INT,
+    PRIMARY KEY (ID_Fin_Ent),
+    FOREIGN KEY (Ent_Typ_ID) REFERENCES EntityType(ID_Ent_Typ)
+);
+
+CREATE TABLE InterestRate (
+    ID_Int_Rat INT AUTO_INCREMENT,
+    Rat_Year DECIMAL(5,2),
+    Cre_Typ_ID INT,
+    Fin_Ent_ID INT,
+    PRIMARY KEY (ID_Int_Rat),
+    FOREIGN KEY (Cre_Typ_ID) REFERENCES CreditType(ID_Type_Cred),
+    FOREIGN KEY (Fin_Ent_ID) REFERENCES FinancialEntity(ID_Fin_Ent)
+);
+
+
+CREATE TABLE CreditAdvisor (
+    ID_Cred_Adv INT AUTO_INCREMENT,
+    Nam_Adv VARCHAR(255),
+    Fin_Ent_ID INT,
+    User VARCHAR(255),
+    Pass VARCHAR(255),
+    PRIMARY KEY (ID_Cred_Adv),
+    FOREIGN KEY (Fin_Ent_ID) REFERENCES FinancialEntity(ID_Fin_Ent)
+);
+
+========================
+INSERTS
+========================
+INSERT INTO CreditType (Name_Cred) VALUES ('Consumo');
+INSERT INTO CreditType (Name_Cred) VALUES ('Microcredito');
+INSERT INTO CreditType (Name_Cred) VALUES ('Vivienda');
+INSERT INTO CreditType (Name_Cred) VALUES ('Estudiantil');
+*************************************************************
+INSERT INTO EntityType (Nam_Ent_Typ) VALUES ('Banco');
+INSERT INTO EntityType (Nam_Ent_Typ) VALUES ('Cooperativa');
+************************************************************
+INSERT INTO CreditAdvisor (Nam_Adv, User, Pass) VALUES ('Luis Zerna', 'Luis', 'pass123');
+INSERT INTO CreditAdvisor (Nam_Adv, User, Pass) VALUES ('Christian Nunez', 'Chris', 'pass456');
+INSERT INTO CreditAdvisor (Nam_Adv, User, Pass) VALUES ('Alan Brito', 'Alan', 'pass789');
+
+*****************************
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Pichincha', 1);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Oscus', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Camara de Comercio de Ambato', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('San Francisco Ltda', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Jep', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Banco Guayaquil', 1);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa Ambato', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa Mushuc Runa', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa Alianza del Valle', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooprogreso', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Banco Central del Ecuador', 1);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa de ahorro y credito CACPECO', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa de ahorro y credito Ambato', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa de ahorro y credito San Francisco', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa Tulcan', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Banco del Pacífico', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa de Ahorro y Crédito Alianza del Valle', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa de Ahorro y Crédito 29 de Octubre', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa de Ahorro y Crédito Cámara de Comercio de Quito', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa de Ahorro y Crédito Santa Ana', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Banco General Rumiñahui', 1);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Interandina', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Jardin Azuayo', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('23 de Julio', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('BANCO SUDAMERICADO', 1);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('PRODUBANCO', 1);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('COOPERATIVA DE Ahorro y Crédito AMBATO LTDA', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa Ahorro y credito TULCAN', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('COPORACION FINANCIERA NACINAL B.P BANCA DEL DESARROLLO DEL ECUADOR', 1);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('CB Cooperativa', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa Policía Nacional', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa 29 de Octubre', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Banco Bolivariano', 1);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Banco de Machala', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa de Ahorro y Crédito ERCO LTDA. ', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa de Ahorro y Crédito Virgen del Cisne', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Cooperativa de Ahorro y Crédito Minga LTDA', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Banco internacional', 1);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('COOPERATIVA DE AHORRO Y CREDITO chibuleo', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('SAC', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('VALLES DEL LIRIO AICEP', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Unión Popular', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Del Austro ', 1);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('El Sagrario', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('La Merced', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('educadores del Azuay', 2);
+INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Luz del valle', 2);
+*******************************************
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.6,1,1);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.5,1,2);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.2,1,3);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.3,1,4);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.77,1,5);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.06,1,6);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (17.3,1,7);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.05,1,8);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.96,1,9);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.77,1,10);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.3,1,11);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.9,1,12);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (17.3,1,13);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.77,1,14);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (14.99,1,15);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.22,1,16);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (17.3,1,17);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10.14,1,18);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.77,1,19);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (14,1,20);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.59,1,21);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (8.55,1,22);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.25,1,23);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.7,1,24);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.5,1,25);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.77,1,26);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (17.3,1,27);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.06,1,28);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (6.13,1,29);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (14.99,1,30);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.49,1,31);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.57,1,32);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.6,1,33);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.77,1,34);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.07,1,35);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (14,1,36);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.2,1,37);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.77,1,38);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15,1,39);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.5,1,40);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.4,1,41);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.2,1,42);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.77,1,43);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.77,1,44);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.77,1,45);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.77,1,46);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15.5,1,47);
+
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (25.12,2,1);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (21.94,2,2);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (19.99,2,3);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (24,2,4);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (21.94,2,5);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (25.5,2,6);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (28.5,2,7);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (22.5,2,8);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.96,2,9);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (20.5,2,10);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (30.5,2,11);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (17.77,2,12);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (28.5,2,13);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (24,2,14);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (21.49,2,15);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (20.13,2,16);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (28.5,2,17);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (24,2,18);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (28.23,2,19);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (26.9,2,20);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (28,2,21);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (24,2,22);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.36,2,23);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (22.6,2,24);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (23.5,2,25);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (22.05,2,26);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (20.97,2,27);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (23.74,2,28);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (28.23,2,29);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (17,2,30);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (18.99,2,31);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (18.7,2,32);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.76,2,33);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (28.23,2,34);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (20.27,2,35);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.5,2,36);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (20.05,2,37);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (24.89,2,38);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (24,2,39);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (20.09,2,40);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (20,2,41);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (24,2,42);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (24.89,2,43);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (21.19,2,44);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (20.75,2,45);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (25,2,46);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (19.8,2,47);
+
+
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (8.45,3,1);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (11.02,3,2);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.5,3,3);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.7,3,4);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10.36,3,5);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (11.33,3,6);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (11.33,3,7);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.5,3,8);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (11,3,10);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (11.33,3,11);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10.36,3,12);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (11.33,3,13);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.7,3,14);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.7,3,15);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (8.99,3,16);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (7,3,17);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10,3,18);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (4.9,3,19);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10,3,20);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (8.95,3,21);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.38,3,23);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10.57,3,24);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (6.99,3,25);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (4.99,3,27);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10.14,3,28);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (4.99,3,29);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.6,3,30);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.99,3,31);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.9,3,32);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.31,3,33);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10.4,3,34);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.2,3,35);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10.4,3,38);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10.7,3,41);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10.39,3,43);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (8.96,3,44);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.93,3,45);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10.4,3,46);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.85,3,47);
+
+
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.39,4,1);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (12.2,4,3);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.5,4,7);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.5,4,13);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (8.87,4,16);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (12,4,17);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (19.75,4,18);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.5,4,19);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (10.5,4,25);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.5,4,27);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.5,4,29);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.5,4,33);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.5,4,34);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (16.07,4,35);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (15,4,39);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (18,4,41);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.5,4,45);
+INSERT INTO InterestRate (Rat_Year, Cre_Typ_ID, Fin_Ent_ID) VALUES (9.5,4,46);
+
+
+
