@@ -316,8 +316,6 @@ public class MainInterface extends javax.swing.JFrame {
         jlblTituloIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png")));
         
         loginInterface login = new loginInterface();
-        login.isEnabled();
-        login.isVisible();
         login.setVisible(true);
     }//GEN-LAST:event_btnLoginMousePressed
 

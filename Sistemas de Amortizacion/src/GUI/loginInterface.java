@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import DataAccess.DataQuery;
+import Entities.UserCredentialsAndRole;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -188,6 +190,11 @@ public class loginInterface extends javax.swing.JFrame {
         String usuario = jtxtUsuario.getText();
         String contrasenia = jtxtContrasenia.getText();
         System.out.println(usuario+" _ "+contrasenia);
+        DataQuery query = new DataQuery();
+        UserCredentialsAndRole user = query.userCredentialsAndRole(usuario, contrasenia);
+        if(user != null){
+            System.out.println(user.getName());
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
