@@ -11,7 +11,7 @@ package Entities;
  */
 public class CreditAdvisor {
     int ID_Cred_Adv;
-    String Nam_Adv;
+    String Name_Adv;
     String Last_Name_Adv;
     String User;
     String Pass;
@@ -21,9 +21,9 @@ public class CreditAdvisor {
     public CreditAdvisor() {
     }
 
-    public CreditAdvisor(int ID_Cred_Adv, String Nam_Adv, String Last_Name_Adv, String User, String Pass, int Fin_Ent_ID, int ID_User_Rol) {
+    public CreditAdvisor(int ID_Cred_Adv, String Name_Adv, String Last_Name_Adv, String User, String Pass, int Fin_Ent_ID, int ID_User_Rol) {
         this.ID_Cred_Adv = ID_Cred_Adv;
-        this.Nam_Adv = Nam_Adv;
+        this.Name_Adv = Name_Adv;
         this.Last_Name_Adv = Last_Name_Adv;
         this.User = User;
         this.Pass = Pass;
@@ -39,12 +39,12 @@ public class CreditAdvisor {
         this.ID_Cred_Adv = ID_Cred_Adv;
     }
 
-    public String getNam_Adv() {
-        return Nam_Adv;
+    public String getName_Adv() {
+        return Name_Adv;
     }
 
-    public void setNam_Adv(String Nam_Adv) {
-        this.Nam_Adv = Nam_Adv;
+    public void setName_Adv(String Name_Adv) {
+        this.Name_Adv = Name_Adv;
     }
 
     public String getLast_Name_Adv() {
@@ -86,8 +86,7 @@ public class CreditAdvisor {
     public void setID_User_Rol(int ID_User_Rol) {
         this.ID_User_Rol = ID_User_Rol;
     }
-   
-    
-    
+
+
     
 }
