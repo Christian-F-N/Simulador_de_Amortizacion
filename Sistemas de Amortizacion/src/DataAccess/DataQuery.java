@@ -39,7 +39,7 @@ public class DataQuery {
             while (datos.next()) {
                 advisor = new CreditAdvisor();
                 advisor.setID_Cred_Adv(datos.getInt("ID_Cred_Adv"));
-                advisor.setNam_Adv(datos.getString("Name_Adv"));
+                advisor.setName_Adv(datos.getString("Name_Adv"));
                 advisor.setLast_Name_Adv(datos.getString("Last_Name_Adv"));
                 advisor.setPass(datos.getString("Pass"));
                 advisor.setUser(datos.getString("User"));
