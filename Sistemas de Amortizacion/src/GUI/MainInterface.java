@@ -49,6 +49,13 @@ public class MainInterface extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jlblTitulo = new javax.swing.JLabel();
         jlblTituloIco = new javax.swing.JLabel();
+        sideInfo = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jtxtDinero = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jtxtTiempo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -246,13 +253,81 @@ public class MainInterface extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Monto de dinero que necesita : ");
+
+        jtxtDinero.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jtxtDinero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtDineroKeyTyped(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setText("¿En cuanto tiempo quiere pagarlo?");
+
+        jtxtTiempo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jtxtTiempo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtTiempoKeyTyped(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setText("¿Qué tipo de Crédito esta buscando?");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout sideInfoLayout = new javax.swing.GroupLayout(sideInfo);
+        sideInfo.setLayout(sideInfoLayout);
+        sideInfoLayout.setHorizontalGroup(
+            sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sideInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(sideInfoLayout.createSequentialGroup()
+                        .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtxtDinero)
+                            .addComponent(jtxtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(361, 361, 361)
+                        .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(sideInfoLayout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(276, 276, 276))
+                            .addGroup(sideInfoLayout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        sideInfoLayout.setVerticalGroup(
+            sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sideInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox1)
+                    .addComponent(jtxtDinero, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jtxtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
                 .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1332, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sideInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(bgLayout.createSequentialGroup()
                 .addGap(346, 346, 346)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -263,14 +338,16 @@ public class MainInterface extends javax.swing.JFrame {
             .addGroup(bgLayout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sideInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 1710, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,17 +391,47 @@ public class MainInterface extends javax.swing.JFrame {
         resetColor(btnAsesores);
         jlblTitulo.setText("Simulador");
         jlblTituloIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png")));
-        
+
         loginInterface login = new loginInterface();
         login.setVisible(true);
     }//GEN-LAST:event_btnLoginMousePressed
 
-    void setColor (JPanel panel){
-        panel.setBackground(new Color(85,65,118));
+    private void jtxtDineroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDineroKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (jtxtDinero.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtxtDineroKeyTyped
+
+    private void jtxtTiempoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTiempoKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (jtxtTiempo.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtxtTiempoKeyTyped
+
+    void setColor(JPanel panel) {
+        panel.setBackground(new Color(85, 65, 118));
     }
-    void resetColor(JPanel panel){
-        panel.setBackground(new Color(64,43,100));
+
+    void resetColor(JPanel panel) {
+        panel.setBackground(new Color(64, 43, 100));
     }
+
     /**
      * @param args the command line arguments
      */
@@ -366,6 +473,10 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JPanel btnBancos;
     private javax.swing.JPanel btnLogin;
     private javax.swing.JPanel btnSimulador;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlblAsesores;
     private javax.swing.JLabel jlblAsesoresIco;
@@ -377,6 +488,9 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jlblSimuladorIco;
     private javax.swing.JLabel jlblTitulo;
     private javax.swing.JLabel jlblTituloIco;
+    private javax.swing.JTextField jtxtDinero;
+    private javax.swing.JTextField jtxtTiempo;
+    private javax.swing.JPanel sideInfo;
     private javax.swing.JPanel sidePanel;
     // End of variables declaration//GEN-END:variables
 }
