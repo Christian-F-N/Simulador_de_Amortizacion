@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/User/Desktop/ProyectoEconimia/Sistema_de_Amortizacion/Sistemas%20de%20Amortizacion/src/Entities/CreditAdvisorData.java</file>
             <file>file:/C:/Users/User/Desktop/ProyectoEconimia/Sistema_de_Amortizacion/Sistemas%20de%20Amortizacion/src/Entities/UserCredentialsAndRole.java</file>
             <file>file:/C:/Users/User/Desktop/ProyectoEconimia/Sistema_de_Amortizacion/Sistemas%20de%20Amortizacion/src/Entities/FinancialEntity.java</file>
@@ -11,6 +12,11 @@
             <file>file:/C:/Users/User/Desktop/ProyectoEconimia/Sistema_de_Amortizacion/Sistemas%20de%20Amortizacion/src/sistemas/de/amortizacion/SistemasDeAmortizacion.java</file>
             <file>file:/C:/Users/User/Desktop/ProyectoEconimia/Sistema_de_Amortizacion/Sistemas%20de%20Amortizacion/src/Entities/InterestRate.java</file>
             <file>file:/C:/Users/User/Desktop/ProyectoEconimia/Sistema_de_Amortizacion/Sistemas%20de%20Amortizacion/src/DataAccess/DataQuery.java</file>
+=======
+            <file>file:/D:/Users/Usuario/Documents/NetBeansProjects/SistemaAmortizacion/Sistema_de_Amortizacion/Sistemas%20de%20Amortizacion/src/sistemas/de/amortizacion/SistemasDeAmortizacion.java</file>
+            <file>file:/D:/Users/Usuario/Documents/NetBeansProjects/SistemaAmortizacion/Sistema_de_Amortizacion/Sistemas%20de%20Amortizacion/src/GUI/loginInterface.java</file>
+            <file>file:/D:/Users/Usuario/Documents/NetBeansProjects/SistemaAmortizacion/Sistema_de_Amortizacion/Sistemas%20de%20Amortizacion/src/GUI/MainInterface.java</file>
+>>>>>>> e09af9f0a1dc39adb92d292b48137a231f883321
         </group>
     </open-files>
 </project-private>
