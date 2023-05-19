@@ -6,6 +6,7 @@
 package GUI;
 
 import java.awt.Color;
+import javax.swing.Icon;
 import javax.swing.JPanel;
 
 /**
@@ -47,12 +48,12 @@ public class MainInterface extends javax.swing.JFrame {
         jlblLogin = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jlblTitulo = new javax.swing.JLabel();
+        jlblTituloIco = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
-        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sidePanel.setBackground(new java.awt.Color(54, 33, 89));
         sidePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,7 +104,7 @@ public class MainInterface extends javax.swing.JFrame {
             }
         });
 
-        jlblSimuladorIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home.png"))); // NOI18N
+        jlblSimuladorIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png"))); // NOI18N
         jlblSimuladorIco.setAlignmentX(0.5F);
         jlblSimuladorIco.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -142,7 +143,7 @@ public class MainInterface extends javax.swing.JFrame {
             }
         });
 
-        jlblAsesoresIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home.png"))); // NOI18N
+        jlblAsesoresIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
         jlblAsesoresIco.setAlignmentX(0.5F);
         jlblAsesoresIco.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -181,7 +182,7 @@ public class MainInterface extends javax.swing.JFrame {
             }
         });
 
-        jlblLoginIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home.png"))); // NOI18N
+        jlblLoginIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
         jlblLoginIco.setAlignmentX(0.5F);
         jlblLoginIco.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -211,9 +212,7 @@ public class MainInterface extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        sidePanel.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 350, -1));
-
-        bg.add(sidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 910));
+        sidePanel.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 800, 350, -1));
 
         jPanel1.setBackground(new java.awt.Color(122, 72, 221));
 
@@ -222,24 +221,50 @@ public class MainInterface extends javax.swing.JFrame {
         jlblTitulo.setForeground(new java.awt.Color(255, 255, 255));
         jlblTitulo.setText("Simulador");
 
+        jlblTituloIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png"))); // NOI18N
+        jlblTituloIco.setAlignmentX(0.5F);
+        jlblTituloIco.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(38, 38, 38)
+                .addComponent(jlblTituloIco)
+                .addGap(43, 43, 43)
                 .addComponent(jlblTitulo)
-                .addContainerGap(1128, Short.MAX_VALUE))
+                .addContainerGap(1057, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jlblTitulo)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jlblTituloIco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlblTitulo))
+                .addGap(24, 24, 24))
         );
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 71, 1360, 210));
+        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
+        bg.setLayout(bgLayout);
+        bgLayout.setHorizontalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(346, 346, 346)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        bgLayout.setVerticalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -261,6 +286,7 @@ public class MainInterface extends javax.swing.JFrame {
         resetColor(btnBancos);
         resetColor(btnLogin);
         jlblTitulo.setText("Simulador");
+        jlblTituloIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png")));
     }//GEN-LAST:event_btnSimuladorMousePressed
 
     private void btnBancosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBancosMousePressed
@@ -269,6 +295,7 @@ public class MainInterface extends javax.swing.JFrame {
         resetColor(btnSimulador);
         resetColor(btnLogin);
         jlblTitulo.setText("Banco");
+        jlblTituloIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home.png")));
     }//GEN-LAST:event_btnBancosMousePressed
 
     private void btnAsesoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAsesoresMousePressed
@@ -277,6 +304,7 @@ public class MainInterface extends javax.swing.JFrame {
         resetColor(btnSimulador);
         resetColor(btnLogin);
         jlblTitulo.setText("Asesores");
+        jlblTituloIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png")));
     }//GEN-LAST:event_btnAsesoresMousePressed
 
     private void btnLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMousePressed
@@ -285,6 +313,12 @@ public class MainInterface extends javax.swing.JFrame {
         resetColor(btnSimulador);
         resetColor(btnAsesores);
         jlblTitulo.setText("Simulador");
+        jlblTituloIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png")));
+        
+        loginInterface login = new loginInterface();
+        login.isEnabled();
+        login.isVisible();
+        login.setVisible(true);
     }//GEN-LAST:event_btnLoginMousePressed
 
     void setColor (JPanel panel){
@@ -344,6 +378,7 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jlblSimulador;
     private javax.swing.JLabel jlblSimuladorIco;
     private javax.swing.JLabel jlblTitulo;
+    private javax.swing.JLabel jlblTituloIco;
     private javax.swing.JPanel sidePanel;
     // End of variables declaration//GEN-END:variables
 }
