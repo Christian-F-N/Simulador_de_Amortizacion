@@ -31,17 +31,24 @@ CREATE TABLE InterestRate (
     FOREIGN KEY (Fin_Ent_ID) REFERENCES FinancialEntity(ID_Fin_Ent)
 );
 
+CREATE TABLE UserRoles (
+    ID_User_Rol INT AUTO_INCREMENT,
+    Name_Rol VARCHAR(255),
+    PRIMARY KEY (ID_User_Rol)
+);
 
 CREATE TABLE CreditAdvisor (
     ID_Cred_Adv INT AUTO_INCREMENT,
-    Nam_Adv VARCHAR(255),
-    Fin_Ent_ID INT,
+    Name_Adv VARCHAR(255),
+    Last_Name_Adv VARCHAR(255),
     User VARCHAR(255),
     Pass VARCHAR(255),
+    Fin_Ent_ID INT,
+    ID_User_Rol INT,
     PRIMARY KEY (ID_Cred_Adv),
-    FOREIGN KEY (Fin_Ent_ID) REFERENCES FinancialEntity(ID_Fin_Ent)
+    FOREIGN KEY (Fin_Ent_ID) REFERENCES FinancialEntity(ID_Fin_Ent),
+    FOREIGN KEY (ID_User_Rol) REFERENCES UserRoles(ID_User_Rol)
 );
-
 ========================
 INSERTS
 ========================
@@ -53,9 +60,12 @@ INSERT INTO CreditType (Name_Cred) VALUES ('Estudiantil');
 INSERT INTO EntityType (Nam_Ent_Typ) VALUES ('Banco');
 INSERT INTO EntityType (Nam_Ent_Typ) VALUES ('Cooperativa');
 ************************************************************
-INSERT INTO CreditAdvisor (Nam_Adv, User, Pass) VALUES ('Luis Zerna', 'Luis', 'pass123');
-INSERT INTO CreditAdvisor (Nam_Adv, User, Pass) VALUES ('Christian Nunez', 'Chris', 'pass456');
-INSERT INTO CreditAdvisor (Nam_Adv, User, Pass) VALUES ('Alan Brito', 'Alan', 'pass789');
+INSERT INTO UserRoles (Name_Rol) VALUES ('Admin'),('Manager'),('User');
+
+************************************************************
+INSERT INTO CreditAdvisor  (Name_Adv, Last_Name_Adv, User, Pass, Fin_Ent_ID, ID_User_Rol) VALUES ('Luis','Zerna', 'Luis', 'pass123',1,1);
+INSERT INTO CreditAdvisor  (Name_Adv, Last_Name_Adv, User, Pass, Fin_Ent_ID, ID_User_Rol) VALUES ('Christian','Nunez', 'Chris', 'pass456',2,2);
+INSERT INTO CreditAdvisor  (Name_Adv, Last_Name_Adv, User, Pass, Fin_Ent_ID, ID_User_Rol) VALUES ('Alan','Brito', 'Alan', 'pass789',3,2);
 
 *****************************
 INSERT INTO FinancialEntity (Nam_Fin_Ent, Ent_Typ_ID) VALUES ('Pichincha', 1);
