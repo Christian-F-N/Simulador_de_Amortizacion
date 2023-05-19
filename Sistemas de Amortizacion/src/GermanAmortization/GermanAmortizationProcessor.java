@@ -11,34 +11,32 @@ package GermanAmortization;
  */
 public class GermanAmortizationProcessor {
 
-//    public static double calculateInstallment(double principal, double interestRate, int loanTerm) {
-//        double monthlyInterestRate = interestRate / 12;
-//        int totalPayments = loanTerm * 12;
-//
-//        double installment = principal / totalPayments;
-//
-//        return installment;
-//    }
-//
-//    public static double calculateTotalInterest(double principal, double interestRate, int loanTerm) {
-//        double monthlyInterestRate = interestRate / 12;
-//        int totalPayments = loanTerm * 12;
-//
-//        double installment = calculateInstallment(principal, interestRate, loanTerm);
-//
-//        double totalInterest = (totalPayments * (principal * monthlyInterestRate)) / 2;
-//
-//        return totalInterest;
-//    }
-//
-//    public static double calculateRemainingBalance(double principal, double interestRate, int loanTerm, int numberOfPaymentsMade) {
-//        double monthlyInterestRate = interestRate / 12;
-//        int totalPayments = loanTerm * 12;
-//
-//        double installment = calculateInstallment(principal, interestRate, loanTerm);
-//
-//        double remainingBalance = principal - (installment * numberOfPaymentsMade);
-//
-//        return remainingBalance;
-//    }
+//calculateCurrentEquity (Capital)
+//calculateTotalInterest(interes)
+//calculateMonthlyPayment(Cuota)
+//calculateRemainingBalance(Saldo)
+    //metodo para calcular el capital necesita el monto y el tiempo en años
+    public double calculateCurrentEquity(double monthlyPayment, int loanTerm) {
+        int totalPayments = loanTerm * 12;
+        double remainingBalance = monthlyPayment / totalPayments;
+        return remainingBalance;
+    }
+
+    //Metodo para calcular el interes necesita el saldo y la tasa de interes anual
+    public double calculateTotalInterest(double amount, double interestRate) {
+        double totalInterest = (amount * interestRate) / 12;
+        return totalInterest;
+    }
+
+    //Metodo para calcular la cuota necesita el interes y el capital
+    public double calculateMonthlyPayment(double interest, double amount) {
+        double monthlyPayment = interest + amount;
+        return monthlyPayment;
+    }
+
+    //Metodo para calcular el saldo anterior y el capital
+    public double calculateRemainingBalance(double amountPast, double currentEquity) {
+        double remainingBalance = amountPast - currentEquity;
+        return remainingBalance;
+    }
 }

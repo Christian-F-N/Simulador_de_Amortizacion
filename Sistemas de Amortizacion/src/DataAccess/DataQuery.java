@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -41,9 +39,12 @@ public class DataQuery {
             while (datos.next()) {
                 advisor = new CreditAdvisor();
                 advisor.setID_Cred_Adv(datos.getInt("ID_Cred_Adv"));
-                advisor.setNam_Adv(datos.getString("Nam_Adv"));
+                advisor.setName_Adv(datos.getString("Name_Adv"));
+                advisor.setLast_Name_Adv(datos.getString("Last_Name_Adv"));
                 advisor.setPass(datos.getString("Pass"));
                 advisor.setUser(datos.getString("User"));
+                advisor.setFin_Ent_ID(datos.getInt("Fin_Ent_ID"));
+                advisor.setID_User_Rol(datos.getInt("ID_User_Rol"));
 
                 advisors.add(advisor);
             }
