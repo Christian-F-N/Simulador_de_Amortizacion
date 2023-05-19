@@ -10,19 +10,22 @@ package Entities;
  * @author User
  */
 public class InterestRate {
-    int ID_Int_Rat;
-    double Rat_Year;
-    int Cre_Typ_ID;
-    int Fin_Ent_ID;
+
+    private int ID_Int_Rat;
+    private double Rat_Year;
+    private int Cre_Typ_ID;
+    private int Fin_Ent_ID;
+    private int Max_Time;
 
     public InterestRate() {
     }
 
-    public InterestRate(int ID_Int_Rat, double Rat_Year, int Cre_Typ_ID, int Fin_Ent_ID) {
+    public InterestRate(int ID_Int_Rat, double Rat_Year, int Cre_Typ_ID, int Fin_Ent_ID, int Max_Time) {
         this.ID_Int_Rat = ID_Int_Rat;
         this.Rat_Year = Rat_Year;
         this.Cre_Typ_ID = Cre_Typ_ID;
         this.Fin_Ent_ID = Fin_Ent_ID;
+        this.Max_Time = Max_Time;
     }
 
     public int getID_Int_Rat() {
@@ -56,6 +59,15 @@ public class InterestRate {
     public void setFin_Ent_ID(int Fin_Ent_ID) {
         this.Fin_Ent_ID = Fin_Ent_ID;
     }
-    
-    
+
+    public int getMax_Time() {
+        return Max_Time;
+    }
+
+    public void setMax_Time(int Max_Time) {
+        this.Max_Time = Max_Time;
+    }
+
+  
+
 }

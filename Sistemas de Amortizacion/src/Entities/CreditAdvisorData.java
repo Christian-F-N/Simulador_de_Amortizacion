@@ -9,8 +9,9 @@ package Entities;
  *
  * @author User
  */
-public class FinancialEntityData {
-        private int ID_Fin_Ent;
+public class CreditAdvisorData {
+
+    private int ID_Fin_Ent;
     private String Nam_Fin_Ent;
     private int ID_Ent_Typ;
     private String Nam_Ent_Typ;
@@ -19,12 +20,14 @@ public class FinancialEntityData {
     private int ID_Int_Rat;
     private double Rat_Year;
     private int Max_Time;
-   
+    private int ID_Cred_Adv;
+    private String Name_Adv;
+    private String Last_Name_Adv;
 
-    public FinancialEntityData() {
+    public CreditAdvisorData() {
     }
 
-    public FinancialEntityData(int ID_Fin_Ent, String Nam_Fin_Ent, int ID_Ent_Typ, String Nam_Ent_Typ, int ID_Type_Cred, String Name_Cred, int ID_Int_Rat, double Rat_Year, int Max_Time) {
+    public CreditAdvisorData(int ID_Fin_Ent, String Nam_Fin_Ent, int ID_Ent_Typ, String Nam_Ent_Typ, int ID_Type_Cred, String Name_Cred, int ID_Int_Rat, double Rat_Year, int Max_Time, int ID_Cred_Adv, String Name_Adv, String Last_Name_Adv) {
         this.ID_Fin_Ent = ID_Fin_Ent;
         this.Nam_Fin_Ent = Nam_Fin_Ent;
         this.ID_Ent_Typ = ID_Ent_Typ;
@@ -34,6 +37,9 @@ public class FinancialEntityData {
         this.ID_Int_Rat = ID_Int_Rat;
         this.Rat_Year = Rat_Year;
         this.Max_Time = Max_Time;
+        this.ID_Cred_Adv = ID_Cred_Adv;
+        this.Name_Adv = Name_Adv;
+        this.Last_Name_Adv = Last_Name_Adv;
     }
 
     public int getID_Fin_Ent() {
@@ -108,6 +114,28 @@ public class FinancialEntityData {
         this.Max_Time = Max_Time;
     }
 
-  
-   
+    public int getID_Cred_Adv() {
+        return ID_Cred_Adv;
+    }
+
+    public void setID_Cred_Adv(int ID_Cred_Adv) {
+        this.ID_Cred_Adv = ID_Cred_Adv;
+    }
+
+    public String getName_Adv() {
+        return Name_Adv;
+    }
+
+    public void setName_Adv(String Name_Adv) {
+        this.Name_Adv = Name_Adv;
+    }
+
+    public String getLast_Name_Adv() {
+        return Last_Name_Adv;
+    }
+
+    public void setLast_Name_Adv(String Last_Name_Adv) {
+        this.Last_Name_Adv = Last_Name_Adv;
+    }
+
 }
