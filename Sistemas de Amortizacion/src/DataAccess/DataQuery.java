@@ -6,6 +6,7 @@
 package DataAccess;
 
 import Entities.CreditAdvisor;
+import Entities.CreditAdvisorData;
 import Entities.CreditType;
 import Entities.EntityType;
 import Entities.FinancialEntity;
@@ -24,16 +25,16 @@ import java.util.ArrayList;
  * @author User
  */
 public class DataQuery {
-
+    
     ResultSet datos, dato;
     Statement st;
     Connection cn;
-
+    
     public DataQuery() {
         DbConnection con = new DbConnection();
         cn = con.connection();
     }
-
+    
     public ArrayList<CreditAdvisor> queryAdvisor() {
         ArrayList<CreditAdvisor> advisors = new ArrayList();
         String query = "SELECT * FROM CreditAdvisor";
@@ -50,7 +51,7 @@ public class DataQuery {
                 advisor.setUser(datos.getString("User"));
                 advisor.setFin_Ent_ID(datos.getInt("Fin_Ent_ID"));
                 advisor.setID_User_Rol(datos.getInt("ID_User_Rol"));
-
+                
                 advisors.add(advisor);
             }
         } catch (SQLException ex) {
@@ -59,7 +60,7 @@ public class DataQuery {
         }
         return advisors;
     }
-
+    
     public ArrayList<CreditType> queryCreditType() {
         ArrayList<CreditType> credits = new ArrayList();
         String query = "SELECT * FROM CreditType";
@@ -79,7 +80,7 @@ public class DataQuery {
         }
         return credits;
     }
-
+    
     public ArrayList<EntityType> queryEntityType() {
         ArrayList<EntityType> entitys = new ArrayList();
         String query = "SELECT * FROM EntityType";
@@ -99,7 +100,7 @@ public class DataQuery {
         }
         return entitys;
     }
-
+    
     public ArrayList<FinancialEntity> queryFinancialEntity() {
         ArrayList<FinancialEntity> financials = new ArrayList();
         String query = "SELECT * FROM FinancialEntity";
@@ -112,7 +113,7 @@ public class DataQuery {
                 financial.setID_Fin_Ent(datos.getInt("ID_Fin_Ent"));
                 financial.setNam_Fin_Ent(datos.getString("Nam_Fin_Ent"));
                 financial.setEnt_Typ_ID(datos.getInt("Ent_Typ_ID"));
-
+                
                 financials.add(financial);
             }
         } catch (SQLException ex) {
@@ -121,7 +122,7 @@ public class DataQuery {
         }
         return financials;
     }
-
+    
     public ArrayList<InterestRate> queryInterestRate() {
         ArrayList<InterestRate> interests = new ArrayList();
         String query = "SELECT * FROM InterestRate";
@@ -135,6 +136,7 @@ public class DataQuery {
                 interest.setRat_Year(datos.getDouble("Rat_Year"));
                 interest.setCre_Typ_ID(datos.getInt("Cre_Typ_ID"));
                 interest.setFin_Ent_ID(datos.getInt("Fin_Ent_ID"));
+                interest.setMax_Time(datos.getInt("Max_Time"));
                 interests.add(interest);
             }
         } catch (SQLException ex) {
@@ -143,7 +145,7 @@ public class DataQuery {
         }
         return interests;
     }
-
+    
     public ArrayList<UserRoles> queryUserRoles() {
         ArrayList<UserRoles> roles = new ArrayList();
         String query = "SELECT * FROM UserRoles";
@@ -165,11 +167,11 @@ public class DataQuery {
         }
         return roles;
     }
-
-    public UserCredentialsAndRole userCredentialsAndRole(String user, String pass) {
-        String query = "SELECT Name_Adv , Last_Name_Adv, Name_Rol\n"
-                + "FROM CreditAdvisor\n"
-                + "JOIN UserRoles ON CreditAdvisor.ID_User_Rol = UserRoles.ID_User_Rol\n"
+    
+    public UserCredentialsAndRole findUserByCredentials(String user, String pass) {
+        String query = "SELECT ID_Cred_Adv, Name_Adv , Last_Name_Adv, Name_Rol"
+                + "FROM CreditAdvisor"
+                + "JOIN UserRoles ON CreditAdvisor.ID_User_Rol = UserRoles.ID_User_Rol"
                 + "WHERE User = '" + user + "' AND Pass = '" + pass + "';";
         UserCredentialsAndRole credential = null;
         try {
@@ -177,9 +179,10 @@ public class DataQuery {
             datos = st.executeQuery(query);
             while (datos.next()) {
                 credential = new UserCredentialsAndRole();
-                credential.setName(datos.getString(1));
-                credential.setLastName(datos.getString(2));
-                credential.setRoleName(datos.getString(3));
+                credential.setID_Cred_Adv(datos.getInt("ID_Cred_Adv"));
+                credential.setName(datos.getString("Name"));
+                credential.setLastName(datos.getString("LastName"));
+                credential.setRoleName(datos.getString("RoleName"));
             }
         } catch (SQLException ex) {
             System.err.println("Error al ejecutar la consulta: " + ex.getMessage());
@@ -187,14 +190,17 @@ public class DataQuery {
         }
         return credential;
     }
-
-    public ArrayList<FinancialEntityData> financialEntityData() {
+    
+    public ArrayList<FinancialEntityData> getFinancialDataByEntity(String creditType, String entityType ) {
         ArrayList<FinancialEntityData> roles = new ArrayList();
-        String query = "SELECT FinancialEntity.ID_Fin_Ent, FinancialEntity.Nam_Fin_Ent, EntityType.ID_Ent_Typ, EntityType.Nam_Ent_Typ, CreditType.ID_Type_Cred, CreditType.Name_Cred, InterestRate.ID_Int_Rat, InterestRate.Rat_Year\n"
-                + "FROM FinancialEntity\n"
-                + "JOIN EntityType ON FinancialEntity.Ent_Typ_ID = EntityType.ID_Ent_Typ\n"
-                + "JOIN InterestRate ON FinancialEntity.ID_Fin_Ent = InterestRate.Fin_Ent_ID\n"
-                + "JOIN CreditType ON InterestRate.Cre_Typ_ID = CreditType.ID_Type_Cred;";
+        String query = "SELECT FinancialEntity.ID_Fin_Ent, FinancialEntity.Nam_Fin_Ent, "
+                + "EntityType.ID_Ent_Typ, EntityType.Nam_Ent_Typ, CreditType.ID_Type_Cred, "
+                + "CreditType.Name_Cred, InterestRate.ID_Int_Rat, InterestRate.Rat_Year,Max_Time"
+                + "FROM FinancialEntity"
+                + "JOIN EntityType ON FinancialEntity.Ent_Typ_ID = EntityType.ID_Ent_Typ"
+                + "JOIN InterestRate ON FinancialEntity.ID_Fin_Ent = InterestRate.Fin_Ent_ID"
+                + "JOIN CreditType ON InterestRate.Cre_Typ_ID = CreditType.ID_Type_Cred;"
+                + "WHERE CreditType.Name_Cred = '"+creditType+"' AND EntityType.Nam_Ent_Typ = '"+entityType+"';";
         FinancialEntityData rol;
         try {
             st = cn.createStatement();
@@ -209,6 +215,7 @@ public class DataQuery {
                 rol.setName_Cred(datos.getString("Name_Cred"));
                 rol.setID_Int_Rat(datos.getInt("ID_Int_Rat"));
                 rol.setRat_Year(datos.getDouble("Rat_Year"));
+                rol.setMax_Time(datos.getInt("Max_Time"));
                 roles.add(rol);
             }
         } catch (SQLException ex) {
@@ -217,4 +224,44 @@ public class DataQuery {
         }
         return roles;
     }
+    
+    public ArrayList<CreditAdvisorData> findByCreditAdvisor(int id) {
+        ArrayList<CreditAdvisorData> roles = new ArrayList();
+        String query = "SELECT FinancialEntity.ID_Fin_Ent, FinancialEntity.Nam_Fin_Ent, "
+                + "EntityType.ID_Ent_Typ, EntityType.Nam_Ent_Typ, CreditType.ID_Type_Cred, "
+                + "CreditType.Name_Cred, InterestRate.ID_Int_Rat, InterestRate.Rat_Year,Max_Time, "
+                + "CreditAdvisor.ID_Cred_Adv, CreditAdvisor.Name_Adv, CreditAdvisor.Last_Name_Adv "
+                + "FROM CreditAdvisor JOIN FinancialEntity ON CreditAdvisor.Fin_Ent_ID = "
+                + "FinancialEntity.ID_Fin_Ent JOIN UserRoles ON CreditAdvisor.ID_User_Rol = "
+                + "UserRoles.ID_User_Rol JOIN InterestRate ON FinancialEntity.ID_Fin_Ent = "
+                + "InterestRate.Fin_Ent_ID JOIN CreditType ON InterestRate.Cre_Typ_ID = "
+                + "CreditType.ID_Type_Cred JOIN EntityType ON FinancialEntity.Ent_Typ_ID = "
+                + "EntityType.ID_Ent_Typ WHERE CreditAdvisor.ID_Cred_Adv = " + id + ";";
+        CreditAdvisorData rol;
+        try {
+            st = cn.createStatement();
+            datos = st.executeQuery(query);
+            while (datos.next()) {
+                rol = new CreditAdvisorData();
+                rol.setID_Fin_Ent(datos.getInt("ID_Fin_Ent"));
+                rol.setNam_Fin_Ent(datos.getString("Nam_Fin_Ent"));
+                rol.setID_Ent_Typ(datos.getInt("ID_Ent_Typ"));
+                rol.setNam_Ent_Typ(datos.getString("Nam_Ent_Typ"));
+                rol.setID_Type_Cred(datos.getInt("ID_Type_Cred"));
+                rol.setName_Cred(datos.getString("Name_Cred"));
+                rol.setID_Int_Rat(datos.getInt("ID_Int_Rat"));
+                rol.setRat_Year(datos.getDouble("Rat_Year"));
+                rol.setMax_Time(datos.getInt("Max_Time"));
+                rol.setID_Cred_Adv(datos.getInt("ID_Cred_Adv"));
+                rol.setName_Adv(datos.getString("Name_Adv"));
+                rol.setLast_Name_Adv(datos.getNString("Last_Name_Adv"));
+                roles.add(rol);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error al ejecutar la consulta: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return roles;
+    }
+    
 }

@@ -5,8 +5,10 @@
  */
 package sistemas.de.amortizacion;
 
+import DataAccess.DataInserter;
 import DataAccess.DataQuery;
 import Entities.CreditAdvisor;
+import Entities.CreditAdvisorData;
 import Entities.CreditType;
 import Entities.EntityType;
 import Entities.FinancialEntity;
@@ -34,14 +36,14 @@ public class SistemasDeAmortizacion {
         //Muestra los datos de los usuarios
         DataQuery query = new DataQuery();
 //        ArrayList<CreditAdvisor> advisors = query.queryAdvisor();
-        
+/**        
           UserCredentialsAndRole user = query.userCredentialsAndRole("Chris","pass456"); 
           if (user == null) { 
           System.out.println("Credenciales incorrectas"); } else { System.out.println("ID: " + user.getName());
           System.out.println("Nombre: " + user.getLastName());
           System.out.println("Apellido: " + user.getRoleName());
           System.out.println("----------------------"); }
-
+**/
 
 //        ArrayList<CreditType> credit = query.queryCreditType();
 //        ArrayList<EntityType> entity = query.queryEntityType();
@@ -61,21 +63,33 @@ public class SistemasDeAmortizacion {
 //        DatosUtil datos = new DatosUtil();
 //        datos.mostrarDatos(credit);
 
-/**control de filtrado
+/**
         ArrayList<FinancialEntityData> credit = query.financialEntityData();
         ArrayList<FinancialEntityData> datos = new ArrayList<>();
         for (FinancialEntityData entityData : credit) {
-            if (entityData.getName_Cred().equals("Consumo") && entityData.getNam_Ent_Typ().equals("Banco")) {
+            if (entityData.getName_Cred().equals("Vivineda") && entityData.getNam_Ent_Typ().equals("Cooperativa")) {
                 datos.add(entityData);
 
             }
         }
-
         for (FinancialEntityData entityName : datos) {
-            System.out.println("Nombre: " + entityName.getNam_Fin_Ent() + "; Id del banco: " + entityName.getID_Fin_Ent()
-                    + "; Tipo de credito: " + entityName.getName_Cred() + "; Tasa: " + entityName.getRat_Year());
+            System.out.println("Nombre de la entidad: " + entityName.getNam_Fin_Ent() +"; Tipo de credito: " + entityName.getName_Cred() + "; Tasa: " + entityName.getRat_Year());
         }
-**/
+   
+        
+        
+        **/
+
+//creditAdvisorData
+int id=2;
+        ArrayList<CreditAdvisorData> credit = query.findByCreditAdvisor(id);
+
+        for (CreditAdvisorData entityName : credit) {
+            System.out.println("Nombre de la entidad: " + entityName.getNam_Fin_Ent() +"; Tipo de credito: " + entityName.getName_Cred() + "; Tasa: " + entityName.getRat_Year());
+        }
+
+
+
 //        mostrarDatos(credit);
 //        mostrarDatos(entity);
 //        mostrarDatos(financial);
@@ -106,6 +120,14 @@ public class SistemasDeAmortizacion {
          * System.out.println("Saldo = " + saldoGerman);
          *
          */
+        
+        
+        //Insert 
+//        System.out.println("insert");
+//        DataInserter p1 = new DataInserter();
+//        CreditType c1= new CreditType();
+//        c1.setName_Cred("prueba");
+//        p1.insertCreditType(c1);
     }
 
 }
