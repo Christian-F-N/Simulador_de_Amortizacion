@@ -22,13 +22,16 @@ public class SistemasDeAmortizacion {
      */
     public static void main(String[] args) {
         //Muestra los datos
-        DataQuery consulta1 = new DataQuery();
-        ArrayList<CreditAdvisor> advisors = consulta1.queryAdvisor();
+        DataQuery query = new DataQuery();
+        ArrayList<CreditAdvisor> advisors = query.queryAdvisor();
         for (CreditAdvisor advisor : advisors) {
             System.out.println("ID: " + advisor.getID_Cred_Adv());
             System.out.println("Nombre: " + advisor.getNam_Adv());
+            System.out.println("Apellido: " + advisor.getLast_Name_Adv());
             System.out.println("Contraseña: " + advisor.getPass());
             System.out.println("Usuario: " + advisor.getUser());
+            System.out.println("ID_Entidad: " + advisor.getFin_Ent_ID());
+            System.out.println("ID_Rol: " + advisor.getID_User_Rol());
             System.out.println("----------------------");
         }
         double cp = 10000;
@@ -40,7 +43,7 @@ public class SistemasDeAmortizacion {
         double interesFrencch = french.calculateTotalInterest(cp, i);
         double capitalFrencch = french.calculateCurrentEquity(cuotaFrencch, interesFrencch);
         double saldoFrencch = french.calculateRemainingBalance(cp, capitalFrencch);
-        System.out.println("Francesa");
+        System.out.println("\nFrancesa");
         System.out.println("Cuota = " + cuotaFrencch);
         System.out.println("Interes = " + interesFrencch);
         System.out.println("Capital = " + capitalFrencch);
@@ -51,7 +54,7 @@ public class SistemasDeAmortizacion {
         double interesGerman = german.calculateTotalInterest(cp, i);
         double cuotaGerman = german.calculateMonthlyPayment(interesGerman, capitalGerman);
         double saldoGerman = german.calculateRemainingBalance(cp, capitalGerman);
-        System.out.println("Alemana");
+        System.out.println("\nAlemana");
         System.out.println("Cuota = " + cuotaGerman);
         System.out.println("Interes = " + interesGerman);
         System.out.println("Capital = " + capitalGerman);
