@@ -10,6 +10,7 @@ package Entities;
  * @author User
  */
 public class UserCredentialsAndRole {
+    private int ID_Cred_Adv;
         private String name;
     private String lastName;
     private String roleName;
@@ -17,10 +18,19 @@ public class UserCredentialsAndRole {
     public UserCredentialsAndRole() {
     }
 
-    public UserCredentialsAndRole(String name, String lastName, String roleName) {
+    public UserCredentialsAndRole(int ID_Cred_Adv, String name, String lastName, String roleName) {
+        this.ID_Cred_Adv = ID_Cred_Adv;
         this.name = name;
         this.lastName = lastName;
         this.roleName = roleName;
+    }
+
+    public int getID_Cred_Adv() {
+        return ID_Cred_Adv;
+    }
+
+    public void setID_Cred_Adv(int ID_Cred_Adv) {
+        this.ID_Cred_Adv = ID_Cred_Adv;
     }
 
     public String getName() {
@@ -46,5 +56,6 @@ public class UserCredentialsAndRole {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
-    
+
+
 }

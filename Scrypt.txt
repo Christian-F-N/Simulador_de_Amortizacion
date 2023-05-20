@@ -25,6 +25,7 @@ CREATE TABLE InterestRate (
     ID_Int_Rat INT AUTO_INCREMENT,
     Rat_Year DECIMAL(5,2),
     Cre_Typ_ID INT,
+    Max_Time INT,
     Fin_Ent_ID INT,
     PRIMARY KEY (ID_Int_Rat),
     FOREIGN KEY (Cre_Typ_ID) REFERENCES CreditType(ID_Type_Cred),

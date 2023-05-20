@@ -191,7 +191,7 @@ public class loginInterface extends javax.swing.JFrame {
         String contrasenia = jtxtContrasenia.getText();
         System.out.println(usuario+" _ "+contrasenia);
         DataQuery query = new DataQuery();
-        UserCredentialsAndRole user = query.userCredentialsAndRole(usuario, contrasenia);
+        UserCredentialsAndRole user = query.findUserByCredentials(usuario, contrasenia);
         if(user != null){
             System.out.println(user.getName());
         }
