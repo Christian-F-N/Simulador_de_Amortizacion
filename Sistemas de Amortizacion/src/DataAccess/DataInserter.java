@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DataAccess;
 
 import Entities.CreditAdvisor;
@@ -17,10 +12,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author User
- */
 public class DataInserter {
 
     Connection cn;
@@ -29,7 +20,7 @@ public class DataInserter {
         DbConnection con = new DbConnection();
         cn = con.connection();
     }
-
+//Inserta una fila en la tabla de tipo de credito, necesario enviar un objeto de tipo CreditType
     public boolean insertCreditType(CreditType loanType) {
         String sql = "INSERT INTO CreditType (Name_Cred) VALUES (?)";
 
@@ -44,6 +35,7 @@ public class DataInserter {
         return false;
     }
 
+//Inserta una fila en la tabla de tipo de entidad, necesario enviar un objeto de tipo EntityType
     public boolean insertEntityType(EntityType entity) {
         String sql = "INSERT INTO EntityType  (Nam_Ent_Typ) VALUES (?)";
 
@@ -58,7 +50,8 @@ public class DataInserter {
         return false;
     }
 
-    public boolean insertFinancialEntity (FinancialEntity  financial) {
+//Inserta una fila en la tabla de entidad financiera, necesario enviar un objeto de tipo FinancialEntity
+    public boolean insertFinancialEntity(FinancialEntity financial) {
         String sql = "INSERT INTO FinancialEntity   (Nam_Fin_Ent, Ent_Typ_ID)  VALUES (?,?)";
 
         try (PreparedStatement pst = cn.prepareStatement(sql)) {
@@ -73,7 +66,8 @@ public class DataInserter {
         return false;
     }
 
-    public boolean insertInterestRate (InterestRate  interest) {
+//Inserta una fila en la tabla de tasa de interes, necesario enviar un objeto de tipo InterestRate
+    public boolean insertInterestRate(InterestRate interest) {
         String sql = "INSERT INTO InterestRate  (Rat_Year, Cre_Typ_ID, Fin_Ent_ID,Max_Time) VALUES (?,?,?,?)";
 
         try (PreparedStatement pst = cn.prepareStatement(sql)) {
@@ -90,7 +84,8 @@ public class DataInserter {
         return false;
     }
 
-    public boolean insertUserRoles (UserRoles  rol) {
+    //Inserta un tipo de credito, necesario enviar un objeto de tipo UserRoles
+    public boolean insertUserRoles(UserRoles rol) {
         String sql = "INSERT INTO UserRoles  (Name_Rol) VALUES (?)";
 
         try (PreparedStatement pst = cn.prepareStatement(sql)) {
@@ -104,7 +99,8 @@ public class DataInserter {
         return false;
     }
 
-    public boolean insertCreditAdvisor (CreditAdvisor  advisor) {
+    //Inserta un tipo de credito, necesario enviar un objeto de tipo CreditAdvisor
+    public boolean insertCreditAdvisor(CreditAdvisor advisor) {
         String sql = "INSERT INTO CreditAdvisor  (Name_Adv, Last_Name_Adv, User, Pass, Fin_Ent_ID, ID_User_Rol) "
                 + "VALUES (?,?,?,?,?,?)";
 
