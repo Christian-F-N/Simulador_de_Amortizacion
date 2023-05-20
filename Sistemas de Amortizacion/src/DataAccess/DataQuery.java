@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DataAccess;
 
 import Entities.CreditAdvisor;
@@ -20,10 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/**
- *
- * @author User
- */
+
 public class DataQuery {
     
     ResultSet datos, dato;
@@ -34,7 +26,7 @@ public class DataQuery {
         DbConnection con = new DbConnection();
         cn = con.connection();
     }
-    
+// Muestra todos los asesores o usuarios con toda su informacion
     public ArrayList<CreditAdvisor> queryAdvisor() {
         ArrayList<CreditAdvisor> advisors = new ArrayList();
         String query = "SELECT * FROM CreditAdvisor";
@@ -60,7 +52,7 @@ public class DataQuery {
         }
         return advisors;
     }
-    
+// Muestra todos los tipos de creditos que existen con toda su informacion 
     public ArrayList<CreditType> queryCreditType() {
         ArrayList<CreditType> credits = new ArrayList();
         String query = "SELECT * FROM CreditType";
@@ -80,7 +72,7 @@ public class DataQuery {
         }
         return credits;
     }
-    
+// Muestra todos los tipos de entidades bancarias con toda su informacion  
     public ArrayList<EntityType> queryEntityType() {
         ArrayList<EntityType> entitys = new ArrayList();
         String query = "SELECT * FROM EntityType";
@@ -100,7 +92,7 @@ public class DataQuery {
         }
         return entitys;
     }
-    
+// Muesta las entidades financieras con toda su informacion    
     public ArrayList<FinancialEntity> queryFinancialEntity() {
         ArrayList<FinancialEntity> financials = new ArrayList();
         String query = "SELECT * FROM FinancialEntity";
@@ -122,7 +114,7 @@ public class DataQuery {
         }
         return financials;
     }
-    
+// Muestra las tasas de interes con toda su informacion  
     public ArrayList<InterestRate> queryInterestRate() {
         ArrayList<InterestRate> interests = new ArrayList();
         String query = "SELECT * FROM InterestRate";
@@ -145,16 +137,14 @@ public class DataQuery {
         }
         return interests;
     }
-    
+// Muestra los relos de usuarios con toda su informacion 
     public ArrayList<UserRoles> queryUserRoles() {
         ArrayList<UserRoles> roles = new ArrayList();
         String query = "SELECT * FROM UserRoles";
         UserRoles rol;
         try {
             st = cn.createStatement();
-//            System.out.println("Ejecutando consulta: " + query);
             datos = st.executeQuery(query);
-//            System.out.println("Consulta ejecutada con éxito.");
             while (datos.next()) {
                 rol = new UserRoles();
                 rol.setID_User_Rol(datos.getInt("ID_User_Rol"));
@@ -167,12 +157,9 @@ public class DataQuery {
         }
         return roles;
     }
-    
+// Recupera la informacion del asesor de credito si el usuario y la contraseña coinciden 
     public UserCredentialsAndRole findUserByCredentials(String user, String pass) {
-        String query = "SELECT ID_Cred_Adv, Name_Adv , Last_Name_Adv, Name_Rol"
-                + "FROM CreditAdvisor"
-                + "JOIN UserRoles ON CreditAdvisor.ID_User_Rol = UserRoles.ID_User_Rol"
-                + "WHERE User = '" + user + "' AND Pass = '" + pass + "';";
+        String query = "SELECT ID_Cred_Adv, Name_Adv , Last_Name_Adv, Name_Rol FROM CreditAdvisor JOIN UserRoles ON CreditAdvisor.ID_User_Rol = UserRoles.ID_User_Rol WHERE User = '" + user + "' AND Pass = '" + pass + "';";
         UserCredentialsAndRole credential = null;
         try {
             st = cn.createStatement();
@@ -180,9 +167,9 @@ public class DataQuery {
             while (datos.next()) {
                 credential = new UserCredentialsAndRole();
                 credential.setID_Cred_Adv(datos.getInt("ID_Cred_Adv"));
-                credential.setName(datos.getString("Name"));
-                credential.setLastName(datos.getString("LastName"));
-                credential.setRoleName(datos.getString("RoleName"));
+                credential.setName(datos.getString("Name_Adv"));
+                credential.setLastName(datos.getString("Last_Name_Adv"));
+                credential.setRoleName(datos.getString("Name_Rol"));
             }
         } catch (SQLException ex) {
             System.err.println("Error al ejecutar la consulta: " + ex.getMessage());
@@ -190,7 +177,7 @@ public class DataQuery {
         }
         return credential;
     }
-    
+// Filtra las entidades financieras por tipo de credito y tipo de entidad   
     public ArrayList<FinancialEntityData> getFinancialDataByEntity(String creditType, String entityType ) {
         ArrayList<FinancialEntityData> roles = new ArrayList();
         String query = "SELECT FinancialEntity.ID_Fin_Ent, FinancialEntity.Nam_Fin_Ent, "
@@ -224,7 +211,7 @@ public class DataQuery {
         }
         return roles;
     }
-    
+// Filatra la entidad financiera a la que perteneces un asesor   
     public ArrayList<CreditAdvisorData> findByCreditAdvisor(int id) {
         ArrayList<CreditAdvisorData> roles = new ArrayList();
         String query = "SELECT FinancialEntity.ID_Fin_Ent, FinancialEntity.Nam_Fin_Ent, "
@@ -263,5 +250,27 @@ public class DataQuery {
         }
         return roles;
     }
+    
+    
+    // Muestra todos los tipos de creditos que existen con toda su informacion 
+//    public ArrayList<CreditType> queryFinByIDCreditType(int ID_Type_Cred) {
+//        ArrayList<CreditType> credits = new ArrayList();
+//        String query = "SELECT * FROM CreditType WHERE ID_Type_Cred="+ID_Type_Cred+";";
+//        CreditType credit;
+//        try {
+//            st = cn.createStatement();
+//            datos = st.executeQuery(query);
+//            while (datos.next()) {
+//                credit = new CreditType();
+//                credit.setID_Type_Cred(datos.getInt("ID_Type_Cred"));
+//                credit.setName_Cred(datos.getString("Name_Cred"));
+//                credits.add(credit);
+//            }
+//        } catch (SQLException ex) {
+//            System.err.println("Error al ejecutar la consulta: " + ex.getMessage());
+//            ex.printStackTrace();
+//        }
+//        return credits;
+//    }
     
 }
