@@ -43,7 +43,7 @@ import sistemas.de.amortizacion.DatosUtil;
 public class AsesorInterfaz extends javax.swing.JFrame {
 
     int selectedRow;
-    int ID = 2;
+    int ID =6;
     DataQuery query = new DataQuery();
     DatosUtil datos = new DatosUtil();
     ArrayList<FinancialEntity> financiales = query.queryFinancialEntity();
@@ -62,12 +62,13 @@ public class AsesorInterfaz extends javax.swing.JFrame {
         cargarDatos();
         jpanelBancos.setVisible(false);
         jcbBanco.setVisible(false);
-        jLabel5.setText(financial.get(0).getNam_Fin_Ent());
         cargarTable();
+        jLabel5.setText(financial.get(0).getNam_Fin_Ent());
     }
 
     public void pedirID(int id) {
         ID = id;
+        jLabel5.setText(financial.get(0).getNam_Fin_Ent());
     }
 
     public void cargarDatos() {

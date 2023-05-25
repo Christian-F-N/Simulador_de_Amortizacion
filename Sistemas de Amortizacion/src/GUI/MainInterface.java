@@ -454,7 +454,7 @@ public class MainInterface extends javax.swing.JFrame {
         Convertir conv = new Convertir();
         try {
             String nombre = JOptionPane.showInputDialog(null, "Nombre del archivo: ");
-            conv.exportarTablaAPDF(jtblTablaAmortisacion, "d:/Users/Usuario/Documents/NetBeansProjects/SistemaAmortizacion/Sistema_de_Amortizacion/Sistemas de Amortizacion/src/pdf/" + nombre + ".pdf");
+            conv.exportarTablaAPDF(jtblTablaAmortisacion, "d:/Users/Usuario/Desktop/pdf/" + nombre + ".pdf");
             JOptionPane.showMessageDialog(null, "El archivo se han guardado correctamente.");
         } catch (FileNotFoundException ex) {
             System.out.println("Error : " + ex);
