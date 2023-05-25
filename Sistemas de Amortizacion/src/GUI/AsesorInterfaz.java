@@ -5,7 +5,11 @@
  */
 package GUI;
 
+import DataAccess.DataDeleter;
+import DataAccess.DataInserter;
 import DataAccess.DataQuery;
+import DataAccess.DataUpdater;
+import Entities.CreditAdvisorData;
 import Entities.CreditType;
 import Entities.EntityType;
 import Entities.FinancialEntity;
@@ -36,20 +40,34 @@ import sistemas.de.amortizacion.DatosUtil;
  *
  * @author User
  */
-public class MainInterface extends javax.swing.JFrame {
+public class AsesorInterfaz extends javax.swing.JFrame {
 
+    int selectedRow;
+    int ID = 2;
     DataQuery query = new DataQuery();
     DatosUtil datos = new DatosUtil();
-    ArrayList<FinancialEntity> financial = query.queryFinancialEntity();
+    ArrayList<FinancialEntity> financiales = query.queryFinancialEntity();
+    ArrayList<CreditAdvisorData> financial = query.findByCreditAdvisor(ID);
     ArrayList<CreditType> credit = query.queryCreditType();
     ArrayList<EntityType> entity = query.queryEntityType();
     ArrayList<InterestRate> interest = query.queryInterestRate();
     ArrayList<UserRoles> roles = query.queryUserRoles();
     ArrayList<InterestRate> interes = new ArrayList<>();
+    DataUpdater update = new DataUpdater();
+    DataDeleter delete = new DataDeleter();
+    DataInserter insert = new DataInserter();
 
-    public MainInterface() {
+    public AsesorInterfaz() {
         initComponents();
         cargarDatos();
+        jpanelBancos.setVisible(false);
+        jcbBanco.setVisible(false);
+        jLabel5.setText(financial.get(0).getNam_Fin_Ent());
+        cargarTable();
+    }
+
+    public void pedirID(int id) {
+        ID = id;
     }
 
     public void cargarDatos() {
@@ -58,6 +76,9 @@ public class MainInterface extends javax.swing.JFrame {
             model.addElement(financial.get(i).getNam_Fin_Ent());
         }
         jcbBanco.setModel(model);
+
+        int selectedIndex = financial.get(0).getID_Fin_Ent();
+        cargarDatosSeleccion(selectedIndex);
     }
 
     /**
@@ -69,8 +90,16 @@ public class MainInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jpanelBancos = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         bg = new javax.swing.JPanel();
         sidePanel = new javax.swing.JPanel();
+        btnBancos = new javax.swing.JPanel();
+        jlblBancosIco = new javax.swing.JLabel();
+        jlblBancos = new javax.swing.JLabel();
         btnSimulador = new javax.swing.JPanel();
         jlblSimuladorIco = new javax.swing.JLabel();
         jlblSimulador = new javax.swing.JLabel();
@@ -102,11 +131,99 @@ public class MainInterface extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
 
+        jpanelBancos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Tipo Credito", "Tasa de interez", "Tiempo Maximo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        jpanelBancos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1010, -1));
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setText("Guardar Cambios");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jpanelBancos.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 10, 320, 40));
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton3.setText("Eliminar Credito");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jpanelBancos.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 60, 320, 40));
+
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sidePanel.setBackground(new java.awt.Color(54, 33, 89));
         sidePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnBancos.setBackground(new java.awt.Color(64, 43, 100));
+        btnBancos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBancosMousePressed(evt);
+            }
+        });
+
+        jlblBancosIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home.png"))); // NOI18N
+        jlblBancosIco.setAlignmentX(0.5F);
+        jlblBancosIco.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jlblBancos.setBackground(new java.awt.Color(255, 255, 255));
+        jlblBancos.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jlblBancos.setForeground(new java.awt.Color(255, 255, 255));
+        jlblBancos.setText("Bancos");
+
+        javax.swing.GroupLayout btnBancosLayout = new javax.swing.GroupLayout(btnBancos);
+        btnBancos.setLayout(btnBancosLayout);
+        btnBancosLayout.setHorizontalGroup(
+            btnBancosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnBancosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlblBancosIco)
+                .addGap(47, 47, 47)
+                .addComponent(jlblBancos)
+                .addContainerGap(152, Short.MAX_VALUE))
+        );
+        btnBancosLayout.setVerticalGroup(
+            btnBancosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnBancosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(btnBancosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jlblBancosIco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlblBancos))
+                .addContainerGap())
+        );
+
+        sidePanel.add(btnBancos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 350, 90));
 
         btnSimulador.setBackground(new java.awt.Color(85, 55, 118));
         btnSimulador.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,7 +278,7 @@ public class MainInterface extends javax.swing.JFrame {
         jlblLogin.setBackground(new java.awt.Color(255, 255, 255));
         jlblLogin.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jlblLogin.setForeground(new java.awt.Color(255, 255, 255));
-        jlblLogin.setText("Ingresar");
+        jlblLogin.setText("Salir");
 
         javax.swing.GroupLayout btnLoginLayout = new javax.swing.GroupLayout(btnLogin);
         btnLogin.setLayout(btnLoginLayout);
@@ -172,7 +289,7 @@ public class MainInterface extends javax.swing.JFrame {
                 .addComponent(jlblLoginIco)
                 .addGap(47, 47, 47)
                 .addComponent(jlblLogin)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
         btnLoginLayout.setVerticalGroup(
             btnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,10 +445,20 @@ public class MainInterface extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(370, Short.MAX_VALUE)
+                    .addComponent(jpanelBancos, javax.swing.GroupLayout.PREFERRED_SIZE, 1389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(175, Short.MAX_VALUE)
+                    .addComponent(jpanelBancos, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         pack();
@@ -340,20 +467,34 @@ public class MainInterface extends javax.swing.JFrame {
 
     private void btnSimuladorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimuladorMousePressed
         setColor(btnSimulador);
+        resetColor(btnBancos);
         resetColor(btnLogin);
         jlblTitulo.setText("Simulador");
         sideInfo.setVisible(true);
+        jpanelBancos.setVisible(false);
         jlblTituloIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png")));
     }//GEN-LAST:event_btnSimuladorMousePressed
 
+    private void btnBancosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBancosMousePressed
+        setColor(btnBancos);
+        resetColor(btnSimulador);
+        resetColor(btnLogin);
+        jlblTitulo.setText("Banco");
+        sideInfo.setVisible(false);
+        jpanelBancos.setVisible(true);
+        cargarTable();
+        jlblTituloIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home.png")));
+    }//GEN-LAST:event_btnBancosMousePressed
+
     private void btnLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMousePressed
         setColor(btnLogin);
+        resetColor(btnBancos);
         resetColor(btnSimulador);
         jlblTitulo.setText("Simulador");
         jlblTituloIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png")));
-
-        loginInterface login = new loginInterface();
-        login.setVisible(true);
+        this.dispose();
+        loginInterface log = new loginInterface();
+        log.setVisible(true);
     }//GEN-LAST:event_btnLoginMousePressed
 
     private void jtxtDineroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDineroKeyTyped
@@ -461,6 +602,40 @@ public class MainInterface extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbtnDescargarActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int fila = selectedRow; // Índice de la fila deseada
+        int columna1 = 1; // Índice de la columna deseada
+        int columna2 = 2; // Índice de la columna deseada
+        Object valor1 = jTable1.getValueAt(fila, columna1);
+        Object valor2 = jTable1.getValueAt(fila, columna2);
+        System.out.println(valor1 + " " + valor2);
+        update.updateInterestRate(Double.parseDouble(valor1.toString()), financial.get(fila).getID_Int_Rat(), financial.get(fila).getID_Type_Cred());
+
+        update.updateMaxTime(Integer.parseInt(valor2.toString()), financial.get(fila).getID_Int_Rat(), financial.get(fila).getID_Type_Cred());
+        cargarTable();
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        selectedRow = jTable1.getSelectedRow();
+        System.out.println(selectedRow);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+        // Verificar la opción seleccionada por el usuario
+        if (opcion == JOptionPane.YES_OPTION) {
+            int fila = selectedRow; // Índice de la fila deseada
+            int id = financial.get(fila).getID_Int_Rat();
+            delete.deleteInterestRate(id);
+            cargarTable();
+            JOptionPane.showMessageDialog(null, "Se ha eliminado el registro");
+            // Realiza las acciones correspondientes si el usuario selecciona 'Sí'
+        } 
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     public Double formatearDecimales(Double numero, Integer numeroDecimales) {
         return Math.round(numero * Math.pow(10, numeroDecimales)) / Math.pow(10, numeroDecimales);
     }
@@ -553,28 +728,32 @@ public class MainInterface extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AsesorInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AsesorInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AsesorInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AsesorInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainInterface().setVisible(true);
+                new AsesorInterfaz().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel bg;
+    public javax.swing.JPanel btnBancos;
     private javax.swing.JPanel btnLogin;
     public javax.swing.JPanel btnSimulador;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -584,11 +763,15 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtnCalcular;
     private javax.swing.JButton jbtnDescargar;
     private javax.swing.JComboBox<String> jcbAmortizacion;
     private javax.swing.JComboBox<String> jcbBanco;
     private javax.swing.JComboBox<String> jcbTipoCredito;
+    private javax.swing.JLabel jlblBancos;
+    private javax.swing.JLabel jlblBancosIco;
     private javax.swing.JLabel jlblLogin;
     private javax.swing.JLabel jlblLoginIco;
     private javax.swing.JLabel jlblSimulador;
@@ -596,10 +779,28 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jlblTitulo;
     private javax.swing.JLabel jlblTituloIco;
     private javax.swing.JPanel jpTabla;
+    private javax.swing.JPanel jpanelBancos;
     private javax.swing.JTable jtblTablaAmortisacion;
     private javax.swing.JTextField jtxtDinero;
     private javax.swing.JTextField jtxtTiempo;
     private javax.swing.JPanel sideInfo;
     public javax.swing.JPanel sidePanel;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarTable() {
+        String x[][] = {};
+        String[] TITULOS = {"Tipo de Credito", "Tasa de interes", "Tiempo Maximo"};
+        DefaultTableModel modelo = new DefaultTableModel(x, TITULOS);
+        financial = query.findByCreditAdvisor(ID);
+        for (int i = 0; i < financial.size(); i++) {
+            String tcredito = financial.get(i).getName_Cred();
+            double tInteres = financial.get(i).getRat_Year();
+            int tiempoMaximo = financial.get(i).getMax_Time();
+            Object[] nuevaFila = {tcredito, tInteres, tiempoMaximo};
+            modelo.addRow(nuevaFila);
+            System.out.println(tcredito);
+        }
+        jTable1.setModel(modelo);
+        jTable1.repaint();
+    }
 }

@@ -15,6 +15,9 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.border.AbstractBorder;
 
 /**
@@ -22,7 +25,10 @@ import javax.swing.border.AbstractBorder;
  * @author Usuario
  */
 public class loginInterface extends javax.swing.JFrame {
-
+    MainInterface ventanaP = new MainInterface();
+    JPanel banco;
+    JPanel asesor;
+    JPanel login;
     /**
      * Creates new form loginInterface
      */
@@ -81,6 +87,7 @@ public class loginInterface extends javax.swing.JFrame {
         jtxtContrasenia = new javax.swing.JTextField();
         jtxtUsuario = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
+        btnConsulta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,16 +127,25 @@ public class loginInterface extends javax.swing.JFrame {
             }
         });
 
+        btnConsulta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnConsulta.setText("Consulta");
+        btnConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnIngresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtxtUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtContrasenia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnIngresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtxtUsuario)
+                    .addComponent(jtxtContrasenia, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                    .addComponent(btnConsulta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -141,7 +157,9 @@ public class loginInterface extends javax.swing.JFrame {
                 .addComponent(jtxtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110))
+                .addGap(18, 18, 18)
+                .addComponent(btnConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,8 +212,24 @@ public class loginInterface extends javax.swing.JFrame {
         UserCredentialsAndRole user = query.findUserByCredentials(usuario, contrasenia);
         if(user != null){
             System.out.println(user.getName());
+            if (user.getRoleName().equals("Manager")){
+                AsesorInterfaz venta = new AsesorInterfaz();
+                this.dispose();
+                venta.pedirID(user.getID_Cred_Adv());
+                venta.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "Credenciales invalidas");
+            }
+            //System.out.println(user.getRoleName()));
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
+        MainInterface v1 = new MainInterface();
+        this.dispose();
+        v1.setVisible(true);
+        
+    }//GEN-LAST:event_btnConsultaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,6 +265,7 @@ public class loginInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsulta;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jtxtContrasenia;
