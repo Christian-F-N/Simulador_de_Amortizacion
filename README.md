@@ -15,30 +15,35 @@ Este repositorio contiene el código fuente y la documentación del Simulador de
 3. Configura las opciones del asesor de crédito según tus necesidades en el archivo de configuración correspondiente.
 4. Ejecuta la aplicación y disfruta de su funcionalidad.
 
-
 # Manual de Desarrollador - Conexión a Base de Datos con Java y MySQL
 
 ## Introducción
+
 Este manual tiene como objetivo proporcionar instrucciones detalladas sobre cómo conectar una aplicación Java a una base de datos MySQL utilizando la biblioteca de conexión JDBC. La aplicación está desarrollada con la interfaz de usuario Swing.
 
 ## Requisitos previos
+
 - XAMPP: Asegúrate de tener instalado XAMPP, que incluye el servidor Apache y MySQL.
 - JDK: Asegúrate de tener instalado el Java Development Kit (JDK) en tu sistema.
 
 ## Configuración de la base de datos
+
 1. Inicia el servidor MySQL de XAMPP.
 2. Abre tu navegador web y accede a phpMyAdmin (por ejemplo, [http://localhost/phpmyadmin](http://localhost/phpmyadmin)).
 3. Crea una nueva base de datos llamada `mi_basedatos`.
 4. Dentro de la base de datos `mi_basedatos`, crea una tabla llamada `usuarios` con las columnas `id` (INT, clave primaria) y `nombre` (VARCHAR).
 
 ## Configuración del proyecto Java
+
 1. Crea un nuevo proyecto Java en tu entorno de desarrollo preferido.
 2. Asegúrate de tener la biblioteca JDBC de MySQL en tu proyecto. Puedes descargarla desde [https://dev.mysql.com/downloads/connector/j/](https://dev.mysql.com/downloads/connector/j/).
 3. Agrega la biblioteca descargada (`mysql-connector-java-x.x.x.jar`) a la configuración de tu proyecto.
 
 ## Conexión a la base de datos
-1. Importa las clases necesarias en tu archivo Java:
+
 ```java
+1. Importa las clases necesarias en tu archivo Java:
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -102,3 +107,4 @@ public class MiAplicacion extends JFrame {
         });
     }
 }
+```
