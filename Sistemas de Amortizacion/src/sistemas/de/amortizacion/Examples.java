@@ -59,14 +59,14 @@ public class Examples {
 //            System.out.println("----------------------");
 //        }
         //============== Muestra los datos Por el id del asesor
-        int id = 2;
-        DataQuery query = new DataQuery();
-        ArrayList<CreditAdvisorData> credit = query.findByCreditAdvisor(id);
-        for (CreditAdvisorData entityName : credit) {
-            System.out.println("Nombre del asesor: "+entityName.getName_Adv()+"\nNombre de la entidad: " + entityName.getNam_Fin_Ent()
-                    + "\nTipo de credito: " + entityName.getName_Cred()
-                    + "\nTasa: " + entityName.getRat_Year()+"\nTiempo maximo: "+entityName.getMax_Time()+" meses\n");
-        }
+//        int id = 2;
+//        DataQuery query = new DataQuery();
+//        ArrayList<CreditAdvisorData> credit = query.findByCreditAdvisor(id);
+//        for (CreditAdvisorData entityName : credit) {
+//            System.out.println("Nombre del asesor: "+entityName.getName_Adv()+"\nNombre de la entidad: " + entityName.getNam_Fin_Ent()
+//                    + "\nTipo de credito: " + entityName.getName_Cred()
+//                    + "\nTasa: " + entityName.getRat_Year()+"\nTiempo maximo: "+entityName.getMax_Time()+" meses\n");
+//        }
         //============= Muestra todos los usuarios
 //        DataQuery query = new DataQuery();
 //        ArrayList<CreditAdvisor> advisors = query.queryAdvisor();
