@@ -41,27 +41,39 @@ Este manual tiene como objetivo proporcionar instrucciones detalladas sobre cóm
 
 ## Conexión a la base de datos
 
-```java
 1. Importa las clases necesarias en tu archivo Java:
 
+```java
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+```
 
 2. Dentro de tu clase principal, agrega los siguientes atributos:
+
+```java
 private static Connection getConnection() throws SQLException {
     return DriverManager.getConnection(URL, USER, PASSWORD);
 }
+```
+
 Asegúrate de actualizar mi_basedatos con el nombre de tu base de datos y proporciona el usuario y contraseña correctos si los has configurado previamente.
 
 3. Agrega el siguiente método para establecer la conexión a la base de datos:
+
+```java
 private static Connection getConnection() throws SQLException {
     return DriverManager.getConnection(URL, USER, PASSWORD);
 }
+```
+
 4. Ahora puedes usar el método getConnection() en tu aplicación para obtener una conexión a la base de datos.
+
 ## Ejemplo de consulta a la base de datos
+
 Aquí hay un ejemplo simple de cómo ejecutar una consulta SELECT en la base de datos y mostrar los resultados en la interfaz de usuario utilizando Swing:
 
+```java
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
