@@ -11,14 +11,14 @@ public class FrenchAmortizationProcessor {
 // el tiempo en meseses decir si son 5 año debe ingresar 60(meses) y la temporalidad
 
     public double calculateMonthlyPayment(double amount, double interestRate, int loanTerm) {
-        double monthlyInterestRate = interestRate /12;
+        double monthlyInterestRate = (interestRate/100) /12;
         double monthlyPayment = amount * (monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loanTerm)));
         return monthlyPayment;
     }
 
 //Metodo para calcular el interes necesita el saldo, la tasa de interes anual y la temporalidad
     public double calculateTotalInterest(double amount, double interestRate, int temporality) {
-        double totalInterest = (amount * interestRate) / temporality;
+        double totalInterest = (amount * interestRate/100) / temporality;
         return totalInterest;
     }
 

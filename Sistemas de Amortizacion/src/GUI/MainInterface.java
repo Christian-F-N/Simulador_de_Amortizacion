@@ -5,9 +5,30 @@
  */
 package GUI;
 
+import DataAccess.DataQuery;
+import Entities.CreditType;
+import Entities.EntityType;
+import Entities.FinancialEntity;
+import Entities.InterestRate;
+import Entities.UserRoles;
+import FrenchAmortization.FrenchAmortizationProcessor;
+import GermanAmortization.GermanAmortizationProcessor;
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.DocumentFilter;
+import sistemas.de.amortizacion.DatosUtil;
 
 /**
  *
@@ -15,12 +36,28 @@ import javax.swing.JPanel;
  */
 public class MainInterface extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainInterface
-     */
+    DataQuery query = new DataQuery();
+    DatosUtil datos = new DatosUtil();
+    ArrayList<FinancialEntity> financial = query.queryFinancialEntity();
+    ArrayList<CreditType> credit = query.queryCreditType();
+    ArrayList<EntityType> entity = query.queryEntityType();
+    ArrayList<InterestRate> interest = query.queryInterestRate();
+    ArrayList<UserRoles> roles = query.queryUserRoles();
+    ArrayList<InterestRate> interes = new ArrayList<>();
+
     public MainInterface() {
         initComponents();
-        //btnBancos.setVisible(false);
+        cargarDatos();
+    }
+
+    
+
+    public void cargarDatos() {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        for (int i = 0; i < financial.size(); i++) {
+            model.addElement(financial.get(i).getNam_Fin_Ent());
+        }
+        jcbBanco.setModel(model);
     }
 
     /**
@@ -49,6 +86,24 @@ public class MainInterface extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jlblTitulo = new javax.swing.JLabel();
         jlblTituloIco = new javax.swing.JLabel();
+        sideInfo = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jtxtDinero = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jtxtTiempo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jcbTipoCredito = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jcbAmortizacion = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jpTabla = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtblTablaAmortisacion = new javax.swing.JTable();
+        jbtnCalcular = new javax.swing.JButton();
+        jbtnDescargar = new javax.swing.JButton();
+        jcbBanco = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -246,31 +301,212 @@ public class MainInterface extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Monto de dinero que necesita : ");
+
+        jtxtDinero.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jtxtDinero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtDineroKeyTyped(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setText("¿En cuanto tiempo quiere pagarlo?");
+
+        jtxtTiempo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jtxtTiempo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtTiempoKeyTyped(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setText("¿Qué tipo de Crédito esta buscando?");
+
+        jcbTipoCredito.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbTipoCredito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTipoCreditoActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel4.setText("Sistema de amortización");
+
+        jcbAmortizacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel6.setText("USD");
+
+        jLabel7.setText("meses");
+
+        jtblTablaAmortisacion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Pagos", "Cuota", "Interez", "Capital", "Saldo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jtblTablaAmortisacion);
+
+        javax.swing.GroupLayout jpTablaLayout = new javax.swing.GroupLayout(jpTabla);
+        jpTabla.setLayout(jpTablaLayout);
+        jpTablaLayout.setHorizontalGroup(
+            jpTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+        );
+        jpTablaLayout.setVerticalGroup(
+            jpTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+        );
+
+        jbtnCalcular.setText("Calcular");
+        jbtnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnCalcularActionPerformed(evt);
+            }
+        });
+
+        jbtnDescargar.setText("Descargar");
+        jbtnDescargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnDescargarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout sideInfoLayout = new javax.swing.GroupLayout(sideInfo);
+        sideInfo.setLayout(sideInfoLayout);
+        sideInfoLayout.setHorizontalGroup(
+            sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sideInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sideInfoLayout.createSequentialGroup()
+                        .addComponent(jpTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(sideInfoLayout.createSequentialGroup()
+                        .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(sideInfoLayout.createSequentialGroup()
+                                .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jtxtDinero)
+                                    .addComponent(jtxtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcbTipoCredito, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcbAmortizacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(288, 288, 288))
+                    .addGroup(sideInfoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbtnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108)
+                        .addComponent(jbtnDescargar, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(458, 458, 458))))
+        );
+        sideInfoLayout.setVerticalGroup(
+            sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sideInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbTipoCredito)
+                    .addComponent(jtxtDinero, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbAmortizacion)
+                    .addComponent(jtxtTiempo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(sideInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnDescargar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jcbBanco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbBanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbBancoActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel5.setText("Seleccione un banco : ");
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
                 .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1332, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sideInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
             .addGroup(bgLayout.createSequentialGroup()
                 .addGap(346, 346, 346)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
+            .addComponent(sidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(bgLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addComponent(jcbBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sideInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 1710, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,6 +514,7 @@ public class MainInterface extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSimuladorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimuladorMousePressed
@@ -314,17 +551,189 @@ public class MainInterface extends javax.swing.JFrame {
         resetColor(btnAsesores);
         jlblTitulo.setText("Simulador");
         jlblTituloIco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png")));
-        
+
         loginInterface login = new loginInterface();
         login.setVisible(true);
     }//GEN-LAST:event_btnLoginMousePressed
 
-    void setColor (JPanel panel){
-        panel.setBackground(new Color(85,65,118));
+    private void jtxtDineroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDineroKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (jtxtDinero.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtxtDineroKeyTyped
+
+    private void jtxtTiempoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTiempoKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (jtxtTiempo.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtxtTiempoKeyTyped
+
+    private void jcbBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbBancoActionPerformed
+        int selectedIndex = jcbBanco.getSelectedIndex() + 1;
+        String selectedElement = jcbBanco.getSelectedItem().toString();
+        System.out.println("Elemento seleccionado: " + selectedElement);
+        System.out.println("Índice seleccionado: " + selectedIndex);
+        cargarDatosSeleccion(selectedIndex);
+
+    }//GEN-LAST:event_jcbBancoActionPerformed
+
+    private void jcbTipoCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoCreditoActionPerformed
+        credit.forEach((p) -> {
+            if (p.getName_Cred().equals(jcbTipoCredito.getSelectedItem())) {
+                interes.forEach((i) -> {
+                    if (p.getID_Type_Cred() == i.getCre_Typ_ID()) {
+                        setMaxNumericLimit(jtxtTiempo, i.getMax_Time());
+                    }
+                });
+            }
+        });
+
+    }//GEN-LAST:event_jcbTipoCreditoActionPerformed
+
+    private void jbtnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCalcularActionPerformed
+        String x[][] = {};
+        String[] TITULOS = {"Pagos", "Cuota", "Interes", "Capital", "Saldo"};
+        DefaultTableModel modelo = new DefaultTableModel(x, TITULOS);
+        double inte = 14;
+        for (int i = 0; i < interes.size(); i++) {
+            for (int j = 0; j < credit.size(); j++) {
+                if (interes.get(i).getCre_Typ_ID() == credit.get(j).getID_Type_Cred()) {
+                    inte = interes.get(i).getRat_Year();
+                }
+            }
+        }
+        double saldo = Integer.parseInt(jtxtDinero.getText());
+
+        int n = Integer.parseInt(jtxtTiempo.getText());
+
+        if (jcbAmortizacion.getSelectedItem().equals("Francesa")) {
+            FrenchAmortizationProcessor frances = new FrenchAmortizationProcessor();
+            double cuota = formatearDecimales(frances.calculateMonthlyPayment(saldo, inte, n), 2);
+            System.out.println(cuota);
+            for (int i = 0; i < n; i++) {
+                double interes = formatearDecimales(frances.calculateTotalInterest(saldo, inte, 12), 2);
+                double capital = formatearDecimales(frances.calculateCurrentEquity(cuota, interes), 2);
+                saldo = formatearDecimales(frances.calculateRemainingBalance(saldo, capital), 2);
+                Object[] nuevaFila = {i + 1, cuota, interes, capital, saldo};
+                modelo.addRow(nuevaFila);
+            }
+            jtblTablaAmortisacion.setModel(modelo);
+            jtblTablaAmortisacion.repaint();
+        } else {
+            GermanAmortizationProcessor aleman = new GermanAmortizationProcessor();
+            double capital = formatearDecimales(aleman.calculateCurrentEquity(saldo, n), 2);
+            for (int i = 0; i < n; i++) {
+                double interes = formatearDecimales(aleman.calculateTotalInterest(saldo, inte, 12), 2);
+                double cuota = formatearDecimales(aleman.calculateMonthlyPayment(interes, saldo), 2);
+                saldo = formatearDecimales(aleman.calculateRemainingBalance(saldo, capital), 2);
+                Object[] nuevaFila = {i + 1, cuota, interes, capital, saldo};
+                modelo.addRow(nuevaFila);
+            }
+            jtblTablaAmortisacion.setModel(modelo);
+            jtblTablaAmortisacion.repaint();
+        }
+    }//GEN-LAST:event_jbtnCalcularActionPerformed
+
+    private void jbtnDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDescargarActionPerformed
+        Convertir conv = new Convertir();
+        try {
+            conv.exportarTablaAPDF(jtblTablaAmortisacion, "d:/Users/Usuario/Documents/NetBeansProjects/SistemaAmortizacion/Sistema_de_Amortizacion/Sistemas de Amortizacion/src/pdf/tabla.pdf");
+        } catch (FileNotFoundException ex) {
+            System.out.println("Error : "+ex);
+        }
+    }//GEN-LAST:event_jbtnDescargarActionPerformed
+
+    public Double formatearDecimales(Double numero, Integer numeroDecimales) {
+        return Math.round(numero * Math.pow(10, numeroDecimales)) / Math.pow(10, numeroDecimales);
     }
-    void resetColor(JPanel panel){
-        panel.setBackground(new Color(64,43,100));
+
+    public void cargarDatosSeleccion(int ID) {
+        interes.clear();
+        DefaultComboBoxModel<String> modelTC = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<String> modelAmortizacion = new DefaultComboBoxModel<>();
+        modelAmortizacion.addElement("Francesa");
+        modelAmortizacion.addElement("Alemana");
+        interest.forEach((data) -> {
+            if (data.getFin_Ent_ID() == ID) {
+                interes.add(data);
+            }
+        });
+        interes.forEach((p) -> {
+            credit.forEach((c) -> {
+                if (c.getID_Type_Cred() == p.getCre_Typ_ID()) {
+                    modelTC.addElement(c.getName_Cred());
+                }
+            });
+        });
+        jcbTipoCredito.setModel(modelTC);
+        jcbAmortizacion.setModel(modelAmortizacion);
+        setMaxNumericLimit(jtxtTiempo, interes.get(0).getMax_Time());
     }
+
+    void setColor(JPanel panel) {
+        panel.setBackground(new Color(85, 65, 118));
+    }
+
+    void resetColor(JPanel panel) {
+        panel.setBackground(new Color(64, 43, 100));
+    }
+
+    public static void setMaxNumericLimit(JTextField textField, final int maxNumero) {
+        Document document = textField.getDocument();
+        if (document instanceof AbstractDocument) {
+            AbstractDocument abstractDocument = (AbstractDocument) document;
+            abstractDocument.setDocumentFilter(new DocumentFilter() {
+                @Override
+                public void insertString(FilterBypass fb, int offset, String text, AttributeSet attr)
+                        throws BadLocationException {
+                    String newStr = fb.getDocument().getText(0, fb.getDocument().getLength()) + text;
+                    if (newStr.length() <= String.valueOf(maxNumero).length()) {
+                        try {
+                            int value = Integer.parseInt(newStr);
+                            if (value <= maxNumero) {
+                                super.insertString(fb, offset, text, attr);
+                            }
+                        } catch (NumberFormatException e) {
+                            // Ignorar inserciones no numéricas
+                        }
+                    }
+                }
+
+                @Override
+                public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+                        throws BadLocationException {
+                    String newStr = fb.getDocument().getText(0, fb.getDocument().getLength()) + text;
+                    if (newStr.length() <= String.valueOf(maxNumero).length()) {
+                        try {
+                            int value = Integer.parseInt(newStr);
+                            if (value <= maxNumero) {
+                                super.replace(fb, offset, length, text, attrs);
+                            }
+                        } catch (NumberFormatException e) {
+                            // Ignorar reemplazos no numéricos
+                        }
+                    }
+                }
+            });
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -366,7 +775,20 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JPanel btnBancos;
     private javax.swing.JPanel btnLogin;
     private javax.swing.JPanel btnSimulador;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtnCalcular;
+    private javax.swing.JButton jbtnDescargar;
+    private javax.swing.JComboBox<String> jcbAmortizacion;
+    private javax.swing.JComboBox<String> jcbBanco;
+    private javax.swing.JComboBox<String> jcbTipoCredito;
     private javax.swing.JLabel jlblAsesores;
     private javax.swing.JLabel jlblAsesoresIco;
     private javax.swing.JLabel jlblBancos;
@@ -377,6 +799,11 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jlblSimuladorIco;
     private javax.swing.JLabel jlblTitulo;
     private javax.swing.JLabel jlblTituloIco;
+    private javax.swing.JPanel jpTabla;
+    private javax.swing.JTable jtblTablaAmortisacion;
+    private javax.swing.JTextField jtxtDinero;
+    private javax.swing.JTextField jtxtTiempo;
+    private javax.swing.JPanel sideInfo;
     private javax.swing.JPanel sidePanel;
     // End of variables declaration//GEN-END:variables
 }
