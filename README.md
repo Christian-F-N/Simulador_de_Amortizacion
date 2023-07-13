@@ -66,7 +66,7 @@ private static Connection getConnection() throws SQLException {
 ```
 4. You can now use the getConnection() method in your application to obtain a connection to the database.
 
-#Example Database Query
+##Example Database Query
 Here's a simple example of how to execute a SELECT query on the database and display the results in the user interface using Swing:
 ```java
 import javax.swing.*;
