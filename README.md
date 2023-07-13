@@ -1,109 +1,104 @@
-# Bienvenido al Simulador de Tabla de Pagos
+# Welcome to the Payment Table Simulator
 
-Este repositorio contiene el código fuente y la documentación del Simulador de Tabla de Pagos, una aplicación diseñada para ayudarte en el cálculo de los pagos y amortizaciones de préstamos utilizando dos sistemas de amortización: el sistema francés y el sistema americano.
+This repository contains the source code and documentation of the Payment Table Simulator, an application designed to assist you in calculating loan payments and amortizations using two amortization systems: the French system and the American system.
 
-## Características principales
+## Key Features
 
-- **Asesor de crédito configurable:** Nuestra aplicación te permite configurar las opciones del asesor de crédito para adaptarlo a tus necesidades específicas. Podrás establecer parámetros como tasas de interés, plazos de pago y monto del préstamo.
+- **Configurable loan advisor:** Our application allows you to configure the options of the loan advisor to adapt it to your specific needs. You can set parameters such as interest rates, payment terms, and loan amount.
 
-- **Generación de reportes:** El simulador te permitirá generar reportes detallados de los pagos y amortizaciones, brindándote una visión clara de la evolución de tu préstamo. Estos reportes te serán útiles tanto a ti como cliente, como a los asesores de crédito que deseen analizar diferentes escenarios.
+- **Report generation:** The simulator allows you to generate detailed reports of payments and amortizations, giving you a clear view of the evolution of your loan. These reports will be useful both to you as a customer and to loan advisors who wish to analyze different scenarios.
 
-## Cómo empezar
+## Getting Started
 
-1. Clona este repositorio en tu máquina local.
-2. Instala las dependencias necesarias siguiendo las instrucciones del archivo `README`.
-3. Configura las opciones del asesor de crédito según tus necesidades en el archivo de configuración correspondiente.
-4. Ejecuta la aplicación y disfruta de su funcionalidad.
+1. Clone this repository to your local machine.
+2. Install the necessary dependencies following the instructions in the `README` file.
+3. Configure the options of the loan advisor according to your needs in the corresponding configuration file.
+4. Run the application and enjoy its functionality.
 
-# Manual de Desarrollador - Conexión a Base de Datos con Java y MySQL
+# Developer's Guide - Connecting Java to MySQL Database
 
-## Introducción
+## Introduction
 
-Este manual tiene como objetivo proporcionar instrucciones detalladas sobre cómo conectar una aplicación Java a una base de datos MySQL utilizando la biblioteca de conexión JDBC. La aplicación está desarrollada con la interfaz de usuario Swing.
+This guide aims to provide detailed instructions on how to connect a Java application to a MySQL database using the JDBC connection library. The application is developed with the Swing user interface.
 
-## Requisitos previos
+## Prerequisites
 
-- XAMPP: Asegúrate de tener instalado XAMPP, que incluye el servidor Apache y MySQL.
-- JDK: Asegúrate de tener instalado el Java Development Kit (JDK) en tu sistema.
+- XAMPP: Make sure you have XAMPP installed, which includes the Apache server and MySQL.
+- JDK: Make sure you have the Java Development Kit (JDK) installed on your system.
 
-## Configuración de la base de datos
+## Database Configuration
 
-1. Inicia el servidor MySQL de XAMPP.
-2. Abre tu navegador web y accede a phpMyAdmin (por ejemplo, [http://localhost/phpmyadmin](http://localhost/phpmyadmin)).
-3. Crea una nueva base de datos llamada `mi_basedatos`.
-4. Dentro de la base de datos `mi_basedatos`, crea una tabla llamada `usuarios` con las columnas `id` (INT, clave primaria) y `nombre` (VARCHAR).
+1. Start the MySQL server in XAMPP.
+2. Open your web browser and access phpMyAdmin (e.g., [http://localhost/phpmyadmin](http://localhost/phpmyadmin)).
+3. Create a new database called `my_database`.
+4. Inside the `my_database`, create a table called `users` with columns `id` (INT, primary key) and `name` (VARCHAR).
 
-## Configuración del proyecto Java
+## Project Configuration
 
-1. Crea un nuevo proyecto Java en tu entorno de desarrollo preferido.
-2. Asegúrate de tener la biblioteca JDBC de MySQL en tu proyecto. Puedes descargarla desde [https://dev.mysql.com/downloads/connector/j/](https://dev.mysql.com/downloads/connector/j/).
-3. Agrega la biblioteca descargada (`mysql-connector-java-x.x.x.jar`) a la configuración de tu proyecto.
+1. Create a new Java project in your preferred development environment.
+2. Make sure you have the MySQL JDBC library in your project. You can download it from [https://dev.mysql.com/downloads/connector/j/](https://dev.mysql.com/downloads/connector/j/).
+3. Add the downloaded library (`mysql-connector-java-x.x.x.jar`) to your project's configuration.
 
-## Conexión a la base de datos
+## Connecting to the Database
 
-1. Importa las clases necesarias en tu archivo Java:
+1. Import the necessary classes into your Java file:
 
 ```java
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 ```
-
-2. Dentro de tu clase principal, agrega los siguientes atributos:
-
+2. Inside your main class, add the following attributes:
 ```java
 private static Connection getConnection() throws SQLException {
     return DriverManager.getConnection(URL, USER, PASSWORD);
 }
+
 ```
+Make sure to update my_database with the name of your database and provide the correct username and password if you have set them previously.
 
-Asegúrate de actualizar mi_basedatos con el nombre de tu base de datos y proporciona el usuario y contraseña correctos si los has configurado previamente.
-
-3. Agrega el siguiente método para establecer la conexión a la base de datos:
-
+3. Add the following method to establish the connection to the database:
 ```java
 private static Connection getConnection() throws SQLException {
     return DriverManager.getConnection(URL, USER, PASSWORD);
 }
+
 ```
+4. You can now use the getConnection() method in your application to obtain a connection to the database.
 
-4. Ahora puedes usar el método getConnection() en tu aplicación para obtener una conexión a la base de datos.
-
-## Ejemplo de consulta a la base de datos
-
-Aquí hay un ejemplo simple de cómo ejecutar una consulta SELECT en la base de datos y mostrar los resultados en la interfaz de usuario utilizando Swing:
-
+#Example Database Query
+Here's a simple example of how to execute a SELECT query on the database and display the results in the user interface using Swing:
 ```java
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
 
-public class MiAplicacion extends JFrame {
+public class MyApplication extends JFrame {
 
-    public MiAplicacion() {
-        // Configuración de la interfaz de usuario
+    public MyApplication() {
+        // User interface setup
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Mi Aplicación");
+        setTitle("My Application");
         setSize(400, 300);
         setLayout(new FlowLayout());
 
         try {
-            // Establecer conexión a la base de datos
+            // Establish connection to the database
             Connection connection = getConnection();
 
-            // Ejecutar consulta SELECT
+            // Execute SELECT query
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM usuarios");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
 
-            // Mostrar resultados en la interfaz de usuario
+            // Display results in the user interface
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                String nombre = resultSet.getString("nombre");
-                JLabel label = new JLabel("ID: " + id + ", Nombre: " + nombre);
+                String name = resultSet.getString("name");
+                JLabel label = new JLabel("ID: " + id + ", Name: " + name);
                 add(label);
             }
 
-            // Cerrar conexiones
+            // Close connections
             resultSet.close();
             statement.close();
             connection.close();
@@ -114,9 +109,14 @@ public class MiAplicacion extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            MiAplicacion app = new MiAplicacion();
+            MyApplication app = new MyApplication();
             app.setVisible(true);
         });
     }
 }
+
 ```
+
+
+
+
